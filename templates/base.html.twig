@@ -1,1 +1,21 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Devcarl Blog{% endblock %}</title>
+</head>
+<body>
+    <div id="header">
+        {% block header %}
+    Header - Nav 
+        {% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}Footer{% endblock %}
+    </div>
+</body>
+</html>

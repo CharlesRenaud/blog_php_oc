@@ -1,13 +1,23 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/Controllers/HomeController.php';
 
 use AltoRouter as AltoRouter;
 use App\Controllers\HomeController;
-require_once __DIR__ . '/src/Controllers/HomeController.php';
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
+
+// Initialize Twig
+$loader = new FilesystemLoader('C:\xampp2\htdocs\blog_php_oc\templates');
+$twig = new Environment($loader);
+
+$twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = []) use ($router) {
+    return $router->generate($name, $params);
+}));
 
 
 $router->map('GET', '/blog_php_oc/', 'HomeController#index', 'home');
@@ -28,8 +38,8 @@ if ($match) {
     list($controller, $action) = explode("#", $match['target']);
     switch ($controller) {
         case "HomeController":
-            $home = new HomeController();
-            $response = $home->index();
+            $home = new HomeController($twig);
+            $response = $home->$action();
             echo $response;
             break;
         default:
@@ -39,6 +49,6 @@ if ($match) {
 } else {
     header("Location: /BlogV1/");
     exit;
-} 
+}
 
-?> 
+?>
