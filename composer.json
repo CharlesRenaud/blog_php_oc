@@ -1,0 +1,25 @@
+{
+    "name": "renau/blog_php_oc",
+    "autoload": {
+        "psr-4": {
+            "Renau\\BlogPhpOc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "CharlesRenaud",
+            "email": "renaudcharlespro@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.5",
+        "doctrine/orm": "^2.14",
+        "symfony/http-foundation": "^6.2",
+        "symfony/routing": "^6.2",
+        "symfony/cache": "^6.2",
+        "doctrine/annotations": "1.14",
+        "symfony/config": "^6.2",
+        "altorouter/altorouter": "^2.0",
+        "symfony/console": "^6.2"
+    }
+}
