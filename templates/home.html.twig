@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <p>Charles Renaud, le développeur qu'il vous faut !</p>
+            <div class="photo-charles"></div>
+        </div>
+    </section>
+    <section class="contact-form">
+        <h2>Contactez-moi</h2>
+        <form method="POST">
+            <div>
+                <label for="name">Nom et prénom</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="email">E-mail de contact</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div>
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <div>
+                <button type="submit">Envoyer</button>
+            </div>
+        </form>
+        <div>
+                <a href="#">Télécharger mon CV</a>
+                <a href="https://github.com/CharlesRenaud">Mon github</a>
+        </div>
+    </section>
+{% endblock %}
