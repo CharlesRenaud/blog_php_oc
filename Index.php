@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/src/Controllers/HomeController.php';
+require_once __DIR__ . '/src/Doctrine.php';
 
 use AltoRouter as AltoRouter;
 use App\Controllers\HomeController;
@@ -11,7 +12,7 @@ use Twig\Loader\FilesystemLoader;
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
-// Initialize Twig
+// Initialiser twig Twig
 $loader = new FilesystemLoader('C:\xampp2\htdocs\blog_php_oc\templates');
 $twig = new Environment($loader);
 
@@ -19,7 +20,10 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = [])
     return $router->generate($name, $params);
 }));
 
+// Initaliser les services
+$entityManager = Doctrine::getEntityManager();
 
+// Les routes
 $router->map('GET', '/blog_php_oc/', 'HomeController#index', 'home');
 
 // Match the current request

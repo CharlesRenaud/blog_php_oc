@@ -1,0 +1,4 @@
+$env:DB_USERNAME = "log"
+$env:DB_PASSWORD = "pass"
+
+vendor\bin\doctrine orm:schema-tool:create
