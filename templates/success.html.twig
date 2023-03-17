@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <p>Utilisateur Enrengistré, redirection vers la page de connexion</p>
+    <script>
+        setTimeout(function () {
+            window.location.href = '/blog_php_oc/login';
+        }, 3000);
+    </script>
+{% endblock %}

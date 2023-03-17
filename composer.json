@@ -21,6 +21,9 @@
         "symfony/config": "^6.2",
         "altorouter/altorouter": "^2.0",
         "symfony/console": "^6.2",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "swiftmailer/swiftmailer": "^6.3",
+        "symfony/validator": "^6.2",
+        "m6web/php-cs-fixer-config": "2.0.0"
     }
 }

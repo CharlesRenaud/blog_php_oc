@@ -8,7 +8,33 @@
 <body>
     <div id="header">
         {% block header %}
-    Header - Nav 
+   <nav>
+        {% if user.authenticated %}
+            {% if user.is_admin %}
+                <p> Navigation : Admin</p>
+                <ul>         
+                    <li><a href="/blog_php_oc/">Accueil</a></li>                           
+                    <li><a href="/blog_php_oc/posts">Publications</a></li>                
+                    <li><a href="/blog_php_oc/logout">Déconnexion</a></li>
+                </ul>
+            {% else %}
+                <p>Navigation : Utilisateur</p>
+                <ul>         
+                    <li><a href="/blog_php_oc/">Accueil</a></li>                           
+                    <li><a href="/blog_php_oc/posts">Publications</a></li>                
+                    <li><a href="/blog_php_oc/logout">Déconnexion</a></li>
+                </ul>
+            {% endif %}
+        {% else %}
+                <p> Navigation : Visiteur</p>
+                <ul>                    
+                    <li><a href="/blog_php_oc/">Accueil</a></li>  
+                    <li><a href="/blog_php_oc/posts">Publications</a></li>                                         
+                    <li><a href="/blog_php_oc/register">Inscription</a></li>                
+                    <li><a href="/blog_php_oc/login">Connexion</a></li>
+                </ul>
+        {% endif %}
+    </nav>
         {% endblock %}
     </div>
     <div id="content">
