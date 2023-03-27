@@ -62,7 +62,13 @@ class Post
     {
         return $this->comments;
     }
-
+    public function getValidatedComments()
+    {
+        return $this->comments->filter(function(Comment $comment) {
+            return $comment->getIsValidated();
+        });
+    }
+    
     public function setComments($comments)
     {
         $this->comments = $comments;

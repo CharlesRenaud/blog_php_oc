@@ -1,31 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog - {{ post.title }}{% endblock %}
+
+{% block title %}Blog -
+	{{ post.title }}
+{% endblock %}
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <p>Publié le {{ post.createdAt|date('F j, Y') }}</p>
-    <h2>Commentaires</h2>
-    
-    {% for comment in post.getComments() %}
-        <p>{{ comment.content }}</p>
-        <p>Par {{ comment.author.name }} le {{ comment.createdAt|date('F j, Y') }}</p>
-    {% endfor %}
-    {% if isAdmin %}
+	<h1>{{ post.title }}</h1>
+	<p>{{ post.content }}</p>
+	<p>Publié le
+		{{ post.createdAt|date('F j, Y') }}</p>
 
-     <h2>Ajoute un commentaire</h2>
-    {% if app.session.has('success') %}
-    <div class="alert alert-success">{{ app.session.get('success') }}</div>
-    {% endif %}
-    <form action="{{ path('add_comment', {'id': post.id}) }}" method="post">
-        <textarea name="content" cols="30" rows="10"></textarea>
-        <br>
-        <input type="submit" value="Publier mon commentaire">
-    </form>
-    {% endif %}
+	<h2>Commentaires validés</h2>
+	{% for comment in post.getValidatedComments %}
+		<p>{{ comment.content }}</p>
+		<p>Par
+			{{ comment.author.name }}
+			le
+			{{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+					{% if isAdmin %}
+				<form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
+					<button type="submit">Supprimer</button>
+				</form>
+			{% endif %}
+		{% endfor %}
+
+		{% if isAuthenticated and not isAdmin %}
+			<h2>Vos commentaires en attente d'une validation</h2>
+			{% for comment in post.getComments %}
+				{% if not comment.getIsValidated and comment.author.id == userId %}
+					<div class="opacity-comment">
+						<p>{{ comment.getContent }}</p>
+						<p>En attente de validation</p>
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+
+		{% if isAdmin %}
+			<h2>Adminsitrer les commentaires en attentes</h2>
+			{% for comment in post.getComments %}
+				{% if not comment.getIsValidated and comment.author.id == userId %}
+					<div class="opacity-comment">
+						<p>{{ comment.getContent }}</p>
+						<p>En attente de validation</p>
+						<form action="{{ path('validate_comment', {'id': comment.id}) }}" method="post">
+							<button type="submit">Valider</button>
+						</form>
+						<form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
+							<button type="submit">Supprimer</button>
+						</form>
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 
 
+		{% if isAuthenticated %}
+			<h2>Ajoute un commentaire</h2>
+			{% if app.session.has('success') %}
+				<div class="alert alert-success">{{ app.session.get('success') }}</div>
+			{% endif %}
+			<form action="{{ path('add_comment', {'id': post.id}) }}" method="post">
+				<textarea name="content" cols="30" rows="10"></textarea>
+				<br>
+				<input type="submit" value="Publier mon commentaire">
+			</form>
+		{% endif %}
 
 
-{% endblock %}
+	{% endblock %}

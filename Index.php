@@ -46,7 +46,13 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
 // Initialiser twig
 $loader = new FilesystemLoader('C:\xampp2\htdocs\blog_php_oc\templates');
 
-$twig = new Environment($loader);
+$twig = new Environment($loader, [
+    'locale' => 'fr_FR',
+    'debug' => true
+]);
+
+$twig->addExtension(new \Twig\Extra\Intl\IntlExtension());
+setlocale(LC_TIME, 'fr_FR.UTF-8');
 
 $twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = []) use ($router) {
     return $router->generate($name, $params);
@@ -69,7 +75,7 @@ $router->map('POST', '/blog_php_oc/', 'HomeController#index', 'home_register');
 
 $router->map('GET', '/blog_php_oc/posts', 'PostController#AllPosts', 'posts');
 $router->map('GET', '/blog_php_oc/post/[i:id]', 'PostController#Post', 'post_single');
-$router->map('POST', '/BlogV1/post/add-comment/[i:id]', 'PostController#addComment', 'add_comment');
+$router->map('POST', '/blog_php_oc/post/add-comment/[i:id]', 'PostController#addComment', 'add_comment');
 
 $router->map('GET', '/blog_php_oc/login', 'SessionController#login', 'session_login_form');
 $router->map('POST', '/blog_php_oc/login', 'SessionController#login', 'session_login');
@@ -79,6 +85,8 @@ $router->map('POST', '/blog_php_oc/register', 'SessionController#register', 'ses
 
 $router->map('GET', '/blog_php_oc/logout', 'SessionController#logout', 'session_logout');
 
+$router->map('POST', '/blog_php_oc/comment/[i:id]/validate', 'PostController#validateComment', 'validate_comment');
+$router->map('POST', '/blog_php_oc/comment/[i:id]/delete', 'PostController#deleteComment', 'delete_comment');
 
 // Match the current request
 $match = $router->match();
@@ -111,9 +119,19 @@ if ($match) {
                 $postId = $match['params']['id'];
                 $response = $post->$action($postId);
             } else if ($action === 'addComment') {
-                $postId = $match['params']['id'];
-                $response = $post->$action($postId);
-            } else {
+                $request = Request::createFromGlobals();
+                $response = $post->addComment($request, $match);
+                echo $response->getContent();
+            } else if ($action === 'validateComment') {
+                $request = Request::createFromGlobals();
+                $response = $post->validateComment($request, $match);
+                echo $response->getContent();
+            } else if ($action === 'deleteComment') {
+                $request = Request::createFromGlobals();
+                $response = $post->deleteComment($request, $match);
+                echo $response->getContent();
+            }
+             else {
                 echo "404 Page Not Found";
                 break;
             }
@@ -142,7 +160,8 @@ if ($match) {
                         break;
                     }
                 case 'logout':
-                    $session->logout();
+                    $response = $session->logout();
+                    echo $response->getContent();
                     break;
                 default:
                     echo "404 Page Not Found";
