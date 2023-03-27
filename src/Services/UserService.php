@@ -37,9 +37,17 @@ class UserService
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
         return !empty($user);
     }
-    
+
     public function getUser($id)
     {
         return $this->entityManager->find(User::class, $id);
+    }
+    public function isAdmin($id)
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($id);
+        if ($user) {
+            return $user->getIsAdmin();
+        }
+        return false;
     }
 }

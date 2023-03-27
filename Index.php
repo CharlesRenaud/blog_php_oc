@@ -67,7 +67,7 @@ $twig->addGlobal('user', $user);
 $entityManager = Doctrine::getEntityManager();
 $userService = new UserService($entityManager);
 $commentService = new CommentService($entityManager);
-$postService = new PostService($entityManager, $commentService);
+$postService = new PostService($entityManager, $commentService, $userService);
 
 // Les routes
 $router->map('GET', '/blog_php_oc/', 'HomeController#index', 'home');
@@ -76,6 +76,11 @@ $router->map('POST', '/blog_php_oc/', 'HomeController#index', 'home_register');
 $router->map('GET', '/blog_php_oc/posts', 'PostController#AllPosts', 'posts');
 $router->map('GET', '/blog_php_oc/post/[i:id]', 'PostController#Post', 'post_single');
 $router->map('POST', '/blog_php_oc/post/add-comment/[i:id]', 'PostController#addComment', 'add_comment');
+
+$router->map('GET', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post_form');
+$router->map('POST', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post');
+$router->map('POST', '/blog_php_oc/post/delete-post/[i:id]', 'PostController#deletePost', 'delete_post');
+$router->map('POST', '/blog_php_oc/post/edit-post/[i:id]', 'PostController#editPost', 'edit_post');
 
 $router->map('GET', '/blog_php_oc/login', 'SessionController#login', 'session_login_form');
 $router->map('POST', '/blog_php_oc/login', 'SessionController#login', 'session_login');
@@ -115,9 +120,23 @@ if ($match) {
             $request = Request::createFromGlobals();
             if ($action === 'AllPosts') {
                 $response = $post->$action();
+                echo $response->getContent();
             } else if ($action === 'Post') {
                 $postId = $match['params']['id'];
                 $response = $post->$action($postId);
+                echo $response->getContent();
+            } else if ($action === 'addPost') {
+                $request = Request::createFromGlobals();
+                $response = $post->addPost($request, $match);
+                echo $response->getContent();
+            } else if ($action === 'deletePost') {
+                $request = Request::createFromGlobals();
+                $response = $post->deletePost($request, $match);
+                echo $response->getContent();
+            } else if ($action === 'editPost') {
+                $request = Request::createFromGlobals();
+                $response = $post->editPost($request, $match);
+                echo $response->getContent();
             } else if ($action === 'addComment') {
                 $request = Request::createFromGlobals();
                 $response = $post->addComment($request, $match);
@@ -130,12 +149,10 @@ if ($match) {
                 $request = Request::createFromGlobals();
                 $response = $post->deleteComment($request, $match);
                 echo $response->getContent();
-            }
-             else {
+            } else {
                 echo "404 Page Not Found";
                 break;
             }
-            echo $response->getContent();
             break;
         case "SessionController":
             $session = new SessionController($entityManager, $twig, $userService);
