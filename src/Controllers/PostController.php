@@ -101,4 +101,95 @@ class PostController
         $referer = $request->headers->get('referer');
         return new RedirectResponse($referer);
     }
+
+    public function addPost(Request $request, $match): Response
+    {
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+
+        // Si la requête est de type POST
+        if ($request->isMethod('POST')) {
+            $title = $request->request->get('title');
+            $content = $request->request->get('content');
+
+            $errors = [];
+
+            if (empty($title)) {
+                $errors[] = "Le titre est manquant, erreur !";
+            }
+            if (empty($content)) {
+                $errors[] = "Le contenu est manquant, erreur !";
+            }
+
+            // Si il y a des erreurs, on affiche les messages et on garde les champs remplis
+            if (!empty($errors)) {
+                return new Response($this->twig->render('createpost.html.twig', [
+                    'errors' => $errors,
+                    'title' => $title,
+                    'content' => $content
+                ]));
+            } else {
+                $authorId = $this->userService->getUser($userId);
+                $post = $this->postService->createPost($title, $content, $authorId);
+                $postId = $post->getId();
+                $_SESSION['success'] = "Post créé avec succès";
+                return new RedirectResponse('/blog_php_oc/post/' . $postId);
+            }
+        } else {
+            // Si la requête est de type GET, on affiche simplement le formulaire vide
+            return new Response($this->twig->render('createpost.html.twig'));
+        }
+    }
+
+
+    public function editPost(Request $request, $match): Response
+    {
+        $postId = $match['params']['id'];
+        $post = $this->postService->getPostById($postId);
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+        $errors = [];
+        if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
+            $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
+        }
+        $title = $request->request->get('title');
+        $content = $request->request->get('content');
+        if (empty($title)) {
+            $errors[] = "Le titre est manquant, erreur !";
+        }
+        if (empty($content)) {
+            $errors[] = "Le contenu est manquant, erreur !";
+        }
+        if (!empty($errors)) {
+            return new Response($this->twig->render('editpost.html.twig', [
+                'errors' => $errors,
+                'post' => $post,
+                'title' => $title,
+                'content' => $content
+            ]));
+        } else {
+            $this->postService->updatePost($postId, $title, $content);
+            $_SESSION['success'] = "Post modifié avec succès";
+            return new RedirectResponse('/blog_php_oc/post/' . $postId);
+        }
+    }
+
+    public function deletePost(Request $request, $match): Response
+    {
+        $postId = $match['params']['id'];
+        $post = $this->postService->getPostById($postId);
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+        $errors = [];
+        if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
+            $errors[] = "Vous n'êtes pas autorisé à supprimer ce post !";
+        }
+        if (!empty($errors)) {
+            return new Response($this->twig->render('singlepost.html.twig', [
+                'errors' => $errors,
+                'post' => $post
+            ]));
+        } else {
+            $this->postService->deletePost($postId);
+            $_SESSION['success'] = "Post supprimé avec succès";
+            return new RedirectResponse('/blog_php_oc/posts');
+        }
+    }
 }
