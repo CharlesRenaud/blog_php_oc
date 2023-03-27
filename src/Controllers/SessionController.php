@@ -71,13 +71,13 @@ class SessionController
             ];
             $userService = new UserService($this->entityManager);
             if ($userService->checkEmailExists($data['email'])) {
-                return new Response('Email already exists', Response::HTTP_BAD_REQUEST);
+                return new Response("L'email est déjà utilisé", Response::HTTP_BAD_REQUEST);
             }
             $user = $userService->createUser($data);
             if ($user) {
                 return new Response($this->twig->render('success.html.twig'));
             } else {
-                return new Response('An error occurred while registering', Response::HTTP_INTERNAL_SERVER_ERROR);
+                return new Response("Une erreur est survenue lors de l'inscription", Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
     }
@@ -85,6 +85,6 @@ class SessionController
     public function logout()
     {
         session_destroy();
-        return header("Location: /blog_php_oc");
+        return new RedirectResponse('/blog_php_oc/');
     }
 }

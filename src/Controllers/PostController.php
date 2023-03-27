@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 use Twig\Environment;
 use App\Services\PostService;
 use App\Services\CommentService;
@@ -32,11 +34,13 @@ class PostController
     }
     public function Post($postId): Response
     {
-        $post = $this->postService->getPostWithValidatedComments($postId);
+        $post = $this->postService->getPostWithComments($postId);
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
         $isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false;
         $isAuthenticated = isset($_SESSION['authenticated']) ? $_SESSION['authenticated'] : false;
         $html = $this->twig->render('singlepost.html.twig', [
             'post' => $post,
+            'userId' => $userId,
             'isAdmin' => $isAdmin,
             'isAuthenticated' => $isAuthenticated
         ]);
@@ -46,33 +50,55 @@ class PostController
     {
         $postId = $match["params"]["id"];
         $content = $request->request->get('content');
+        $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+        $isAdmin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false;
+        $isAuthenticated = isset($_SESSION['authenticated']) ? $_SESSION['authenticated'] : false;
         $errors = [];
         if (empty($content)) {
-            $errors[] = "Content is required";
+            $errors[] = "Le message est vide, erreur !";
         }
-        $post = $this->postService->getPostWithValidatedComments($postId);
+        $post = $this->postService->getPostWithComments($postId);
         if (!empty($errors)) {
             if ($post != null) {
-                $validatedComments = $this->commentService->getValidatedCommentsByPostId($postId);
-                return new Response($this->twig->render('singlepostwithcomments.html.twig', [
+                return new Response($this->twig->render('singlepost.html.twig', [
                     'post' => $post,
-                    'validatedComments' => $validatedComments,
+                    'userId' => $userId,
+                    'isAdmin' => $isAdmin,
+                    'isAuthenticated' => $isAuthenticated,
                     'errors' => "Contenu manquant"
                 ]));
             } else {
-                $validatedComments = [];
-                var_dump($validatedComments);
-                return new Response($this->twig->render('singlepostwithcomments.html.twig', [
+                return new Response($this->twig->render('singlepost.html.twig', [
                     'post' => $post,
-                    'validatedComments' => $validatedComments,
+                    'userId' => $userId,
+                    'isAdmin' => $isAdmin,
+                    'isAuthenticated' => $isAuthenticated
                 ]));
             }
         } else {
             $authorId = $this->userService->getUser($_SESSION['user_id']);
             $this->commentService->createComment($content, $postId, $authorId);
             $_SESSION['success'] = "Commentaire créé avec succès";
-            header("Location: /BlogV1/post/single/" . $postId);
-            exit();
+            return new RedirectResponse('/blog_php_oc/post/' . $postId);
         }
+    }
+
+
+    public function validateComment(Request $request, $match): Response
+    {
+        $commentId = $match['params']['id'];
+        $this->commentService->validateComment($commentId);
+        $_SESSION['success'] = "Commentaire validé avec succès";
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
+    }
+
+    public function deleteComment(Request $request, $match): Response
+    {
+        $commentId = $match['params']['id'];
+        $this->commentService->deleteComment($commentId);
+        $_SESSION['success'] = "Commentaire supprimé avec succès";
+        $referer = $request->headers->get('referer');
+        return new RedirectResponse($referer);
     }
 }

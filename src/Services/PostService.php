@@ -40,4 +40,9 @@ class PostService
         }
         return $post;
     }
+    
+    public function getPostWithComments($postId)
+    {
+        return $this->entityManager->getRepository(Post::class)->find($postId);
+    }   
 }
