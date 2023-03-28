@@ -50,4 +50,16 @@ class UserService
         }
         return false;
     }
+    public function editUser(User $user)
+    {
+        $user->setUpdatedAt(new \DateTime());
+        $this->entityManager->flush();
+    }
+
+    public function deleteUser($userId)
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($userId);
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
 }

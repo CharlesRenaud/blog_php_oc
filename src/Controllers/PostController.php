@@ -5,6 +5,9 @@ namespace App\Controllers;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 use Twig\Environment;
 use App\Services\PostService;
@@ -110,6 +113,11 @@ class PostController
         if ($request->isMethod('POST')) {
             $title = $request->request->get('title');
             $content = $request->request->get('content');
+            $coverImage = $request->files->get('coverImage');
+            if ($coverImage) {
+                $fileName = uniqid() . '.' . $coverImage->guessExtension();
+                $coverImage->move('uploads', $fileName);
+            }
 
             $errors = [];
 
@@ -129,16 +137,23 @@ class PostController
                 ]));
             } else {
                 $authorId = $this->userService->getUser($userId);
-                $post = $this->postService->createPost($title, $content, $authorId);
+
+
+                $post = $this->postService->createPost($title, $content, $authorId, $fileName);
+
+                // Enregistrer l'image de couverture
+
+
                 $postId = $post->getId();
                 $_SESSION['success'] = "Post créé avec succès";
                 return new RedirectResponse('/blog_php_oc/post/' . $postId);
             }
         } else {
-            // Si la requête est de type GET, on affiche simplement le formulaire vide
+            // Si la requête est de type GET, on affiche le formulaire vide
             return new Response($this->twig->render('createpost.html.twig'));
         }
     }
+
 
 
     public function editPost(Request $request, $match): Response
@@ -146,6 +161,11 @@ class PostController
         $postId = $match['params']['id'];
         $post = $this->postService->getPostById($postId);
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+        $coverImage = $request->files->get('coverImage');
+        if ($coverImage) {
+            $fileName = uniqid() . '.' . $coverImage->guessExtension();
+            $coverImage->move('uploads', $fileName);
+        }
         $errors = [];
         if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
             $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
@@ -163,10 +183,12 @@ class PostController
                 'errors' => $errors,
                 'post' => $post,
                 'title' => $title,
-                'content' => $content
+                'content' => $content,
+                'coverImage' => $coverImage
+
             ]));
         } else {
-            $this->postService->updatePost($postId, $title, $content);
+            $this->postService->updatePost($postId, $title, $content, $coverImage);
             $_SESSION['success'] = "Post modifié avec succès";
             return new RedirectResponse('/blog_php_oc/post/' . $postId);
         }

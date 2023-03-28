@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 
@@ -52,6 +53,11 @@ class Post
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coverImage;
+
 
     public function __construct()
     {
@@ -64,11 +70,11 @@ class Post
     }
     public function getValidatedComments()
     {
-        return $this->comments->filter(function(Comment $comment) {
+        return $this->comments->filter(function (Comment $comment) {
             return $comment->getIsValidated();
         });
     }
-    
+
     public function setComments($comments)
     {
         $this->comments = $comments;
@@ -128,4 +134,14 @@ class Post
     {
         $this->author = $author;
     }
+    public function getCoverImage()
+    {
+        return $this->coverImage;
+    }
+
+    public function setCoverImage(String $coverImage)
+    {
+        $this->coverImage = $coverImage;
+    }
+    
 }
