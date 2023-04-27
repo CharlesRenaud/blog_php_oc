@@ -4,6 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/src/Controllers/HomeController.php';
 require_once __DIR__ . '/src/Controllers/PostController.php';
 require_once __DIR__ . '/src/Controllers/SessionController.php';
+require_once __DIR__ . '/src/Controllers/AssetsController.php';
 require_once __DIR__ . '/src/Services/PostService.php';
 require_once __DIR__ . '/src/Services/CommentService.php';
 require_once __DIR__ . '/src/Services/UserService.php';
@@ -11,10 +12,12 @@ require_once __DIR__ . '/src/Doctrine.php';
 
 use AltoRouter as AltoRouter;
 use Symfony\Component\HttpFoundation\Request;
+use \Twig\Extension\DebugExtension;
 
 use App\Controllers\HomeController;
-use App\Controllers\PostController; // Ajoutez le namespace du contrôleur PostController
-use App\Controllers\SessionController; // Ajoutez le namespace du contrôleur PostController
+use App\Controllers\PostController;
+use App\Controllers\SessionController;
+use App\Controllers\AssetsController;
 use App\Services\CommentService;
 use App\Services\PostService;
 use App\Services\UserService;
@@ -26,6 +29,13 @@ use Twig\Loader\FilesystemLoader;
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
     ->setUsername('smtpocblogtest@gmail.com')
     ->setPassword('hygxjupuqdkadjhv');
+$transport->setStreamOptions([
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    ]
+]);
 $mailer = new Swift_Mailer($transport);
 
 
@@ -34,22 +44,23 @@ $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
 
 // Vérifiez si l'utilisateur est connecté et est un admin
-var_dump($_SESSION);
 if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
-    $user = ['is_admin' => true, 'authenticated' => true];
+    $user = ['is_admin' => true, 'authenticated' => true, 'name' => $_SESSION['name']];
 } elseif (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-    $user = ['is_admin' => false, 'authenticated' => true];
+    $user = ['is_admin' => false, 'authenticated' => true, 'name' => $_SESSION['name']];
 } else {
     $user = ['is_admin' => false, 'authenticated' => false];
 }
 
+
 // Initialiser twig
-$loader = new FilesystemLoader('C:\xampp2\htdocs\blog_php_oc\templates');
+$loader = new FilesystemLoader(__DIR__ . '/templates');
 
 $twig = new Environment($loader, [
     'locale' => 'fr_FR',
     'debug' => true
 ]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $twig->addExtension(new \Twig\Extra\Intl\IntlExtension());
 setlocale(LC_TIME, 'fr_FR.UTF-8');
@@ -60,7 +71,6 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = [])
 
 // Ajoutez la variable user à tous les templates qui étendent bas.html.twig
 $twig->addGlobal('user', $user);
-
 
 
 // Initaliser les services
@@ -93,16 +103,23 @@ $router->map('GET', '/blog_php_oc/logout', 'SessionController#logout', 'session_
 $router->map('POST', '/blog_php_oc/comment/[i:id]/validate', 'PostController#validateComment', 'validate_comment');
 $router->map('POST', '/blog_php_oc/comment/[i:id]/delete', 'PostController#deleteComment', 'delete_comment');
 
+$router->map('GET', '/blog_php_oc/assets/styles/base.css', 'AssetsController#serveCss', 'serve_css');
+$router->map('GET', '/blog_php_oc/assets/scripts/js.js', 'AssetsController#serveJs', 'serve_js');
+
+
 // Match the current request
 $match = $router->match();
 
 // Debugging information
+/*
 if ($match) {
-    echo 'Matched route: ' . $match['name'] . '<br>';
-    echo 'Params: ' . print_r($match['params'], true) . '<br>';
-} else {
-    echo 'Pas de routes match: ' . $uri . '<br>';
-}
+    if ($match['name'] !== "serve_css" && $match['name'] !== "serve_js") {
+        echo 'Matched route: ' . $match['name'] . '<br>';
+        echo 'Params: ' . print_r($match['params'], true) . '<br>';
+    }
+} else if ($match['name'] !== "serve_css" && $match['name'] !== "serve_js") {
+    echo 'No matching routes found for: ' . $uri . '<br>';
+}*/
 
 
 // Match des routes
@@ -115,43 +132,57 @@ if ($match) {
             $response = $home->$action($request);
             echo $response->getContent();
             break;
+        case "AssetsController":
+            $assets = new AssetsController();
+            $request = Request::createFromGlobals();
+            switch ($action) {
+                case 'serveJs':
+                    $response = $assets->$action($request);
+                    echo $response->getContent();
+                    break;
+                case 'serveCss':
+                    $response = $assets->$action($request);
+                    echo $response->getContent();
+                    break;
+            }
+            break;
         case "PostController":
             $post = new PostController($twig, $postService, $commentService, $userService);
             $request = Request::createFromGlobals();
-            if ($action === 'AllPosts') {
-                $response = $post->$action();
-                echo $response->getContent();
-            } else if ($action === 'Post') {
-                $postId = $match['params']['id'];
-                $response = $post->$action($postId);
-                echo $response->getContent();
-            } else if ($action === 'addPost') {
-                $request = Request::createFromGlobals();
-                $response = $post->addPost($request, $match);
-                echo $response->getContent();
-            } else if ($action === 'deletePost') {
-                $request = Request::createFromGlobals();
-                $response = $post->deletePost($request, $match);
-                echo $response->getContent();
-            } else if ($action === 'editPost') {
-                $request = Request::createFromGlobals();
-                $response = $post->editPost($request, $match);
-                echo $response->getContent();
-            } else if ($action === 'addComment') {
-                $request = Request::createFromGlobals();
-                $response = $post->addComment($request, $match);
-                echo $response->getContent();
-            } else if ($action === 'validateComment') {
-                $request = Request::createFromGlobals();
-                $response = $post->validateComment($request, $match);
-                echo $response->getContent();
-            } else if ($action === 'deleteComment') {
-                $request = Request::createFromGlobals();
-                $response = $post->deleteComment($request, $match);
-                echo $response->getContent();
-            } else {
-                echo "404 Page Not Found";
-                break;
+            switch ($action) {
+                case 'AllPosts':
+                    $response = $post->$action();
+                    echo $response->getContent();
+                    break;
+                case 'Post':
+                    $postId = $match['params']['id'];
+                    $response = $post->$action($postId);
+                    echo $response->getContent();
+                    break;
+                case 'addPost':
+                    $response = $post->addPost($request, $match);
+                    echo $response->getContent();
+                    break;
+                case 'deletePost':
+                    $response = $post->deletePost($request, $match);
+                    echo $response->getContent();
+                    break;
+                case 'editPost':
+                    $response = $post->editPost($request, $match);
+                    echo $response->getContent();
+                    break;
+                case 'addComment':
+                    $response = $post->addComment($request, $match);
+                    echo $response->getContent();
+                    break;
+                case 'validateComment':
+                    $response = $post->validateComment($request, $match);
+                    echo $response->getContent();
+                    break;
+                case 'deleteComment':
+                    $response = $post->deleteComment($request, $match);
+                    echo $response->getContent();
+                    break;
             }
             break;
         case "SessionController":
@@ -185,7 +216,6 @@ if ($match) {
                     break;
             }
             break;
-
         default:
             echo "404 Page Not Found";
             break;

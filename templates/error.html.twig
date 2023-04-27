@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de contact{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Erreur lors de la soumission du formulaire</h1>
+    <ul>
+      {% for key, error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    <a href="{{ path('home') }}">Retour à la page d'accueil</a>
+  </div>
+{% endblock %}

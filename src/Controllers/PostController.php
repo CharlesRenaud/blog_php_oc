@@ -35,6 +35,7 @@ class PostController
         $html = $this->twig->render('postlist.html.twig', ['posts' => $posts]);
         return new Response($html);
     }
+    
     public function Post($postId): Response
     {
         $post = $this->postService->getPostWithComments($postId);
@@ -113,6 +114,8 @@ class PostController
         if ($request->isMethod('POST')) {
             $title = $request->request->get('title');
             $content = $request->request->get('content');
+            $externalUrl = $request->request->get('externalUrl');
+            $claim = $request->request->get('claim');
             $coverImage = $request->files->get('coverImage');
             if ($coverImage) {
                 $fileName = uniqid() . '.' . $coverImage->guessExtension();
@@ -139,7 +142,7 @@ class PostController
                 $authorId = $this->userService->getUser($userId);
 
 
-                $post = $this->postService->createPost($title, $content, $authorId, $fileName);
+                $post = $this->postService->createPost($title, $content, $authorId, $fileName, $externalUrl, $claim);
 
                 // Enregistrer l'image de couverture
 
@@ -162,6 +165,8 @@ class PostController
         $post = $this->postService->getPostById($postId);
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
         $coverImage = $request->files->get('coverImage');
+        $externalUrl = $request->get('externalUrl');
+        $claim = $request->get('claim');
         if ($coverImage) {
             $fileName = uniqid() . '.' . $coverImage->guessExtension();
             $coverImage->move('uploads', $fileName);
@@ -188,7 +193,7 @@ class PostController
 
             ]));
         } else {
-            $this->postService->updatePost($postId, $title, $content, $coverImage);
+            $this->postService->updatePost($postId, $title, $content, $coverImage, $externalUrl, $claim);
             $_SESSION['success'] = "Post modifié avec succès";
             return new RedirectResponse('/blog_php_oc/post/' . $postId);
         }

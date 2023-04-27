@@ -9,7 +9,7 @@
 	{% if post.coverImage %}
 		<img src="http://localhost/blog_php_oc/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
 	{% endif %}
-	<h1>{{ post.title }}</h1>
+	<h1 class="titre-1">{{ post.title }}</h1>
 	<p>{{ post.content }}</p>
 	<p>Publié le
 		{{ post.createdAt|date('F j, Y') }}</p>

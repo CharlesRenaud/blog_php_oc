@@ -1,48 +1,85 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Devcarl Blog{% endblock %}</title>
-</head>
-<body>
-    <div id="header">
-        {% block header %}
-   <nav>
-        {% if user.authenticated %}
-            {% if user.is_admin %}
-                <p> Navigation : Admin</p>
-                <ul>         
-                    <li><a href="/blog_php_oc/">Accueil</a></li>                           
-                    <li><a href="/blog_php_oc/posts">Publications</a></li>   
-                    <li><a href="/blog_php_oc/post/add-post">Publier</a></li>             
-                    <li><a href="/blog_php_oc/logout">Déconnexion</a></li>
-                </ul>
-            {% else %}
-                <p>Navigation : Utilisateur</p>
-                <ul>         
-                    <li><a href="/blog_php_oc/">Accueil</a></li>                           
-                    <li><a href="/blog_php_oc/posts">Publications</a></li>                
-                    <li><a href="/blog_php_oc/logout">Déconnexion</a></li>
-                </ul>
-            {% endif %}
-        {% else %}
-                <p> Navigation : Visiteur</p>
-                <ul>                    
-                    <li><a href="/blog_php_oc/">Accueil</a></li>  
-                    <li><a href="/blog_php_oc/posts">Publications</a></li>                                         
-                    <li><a href="/blog_php_oc/register">Inscription</a></li>                
-                    <li><a href="/blog_php_oc/login">Connexion</a></li>
-                </ul>
-        {% endif %}
-    </nav>
-        {% endblock %}
-    </div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-    <div id="footer">
-        {% block footer %}Footer{% endblock %}
-    </div>
-</body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Devcarl Blog
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ path('serve_css') }}">
+	</head>
+	<body>
+		<div id="header">
+			{% block header %}
+				<nav class="navbar">
+					{% if user.authenticated %}
+						{% if user.is_admin %}
+							<p>Bienvenue
+								{{ user.name }}</p>
+							<ul class="menu">
+								<li>
+									<a href="/blog_php_oc/">Accueil</a>
+								</li>
+								<li>
+									<a href="/blog_php_oc/posts">Publications</a>
+								</li>
+								<li>
+									<a href="/blog_php_oc/post/add-post">Publier</a>
+								</li>
+								<li>
+									<a href="/blog_php_oc/logout">Déconnexion</a>
+								</li>
+							</ul>
+						{% else %}
+							<p>Bienvenue
+								{{ user.name }}</p>
+							<ul class="menu">
+								<li>
+									<a href="/blog_php_oc/">Accueil</a>
+								</li>
+								<li>
+									<a href="/blog_php_oc/posts">Publications</a>
+								</li>
+								<li>
+									<a href="/blog_php_oc/logout">Déconnexion</a>
+								</li>
+							</ul>
+						{% endif %}
+					{% else %}
+						<p>
+							Devcarl</p>
+						<ul class="menu">
+							<li>
+								<a href="/blog_php_oc/">Accueil</a>
+							</li>
+							<li>
+								<a href="/blog_php_oc/posts">Publications</a>
+							</li>
+							<li>
+								<a href="/blog_php_oc/register">Inscription</a>
+							</li>
+							<li>
+								<a href="/blog_php_oc/login">Connexion</a>
+							</li>
+						</ul>
+					{% endif %}
+					<div class="burger-menu">
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+					</div>
+				</nav>
+				{% block javascripts %}
+					<script src="{{ path('serve_js') }}"></script>
+				{% endblock %}
+			{% endblock %}
+		</div>
+		<div id="content"> {% block content %}{% endblock %}
+			</div>
+			<div id="footer">
+				{% block footer %}
+					<p>Copyright ©2023, tous droits réservés.</p>
+				{% endblock %}
+			</div>
+		</body>
+	</html>
