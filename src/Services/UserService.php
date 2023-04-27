@@ -13,18 +13,19 @@ class UserService
     {
         $this->entityManager = $entityManager;
     }
-    public function createUser($data)
+    public function createUser(array $data): User
     {
         $user = new User();
-        $user->setName($data['name']);
-        $user->setEmail($data['email']);
+        $user->setName(strip_tags($data['name']));
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException("Adresse e-mail invalide.");
+        }
+        $user->setEmail(strip_tags($data['email']));
         $user->setIsAdmin($data['isAdmin']);
         $user->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
         $user->setCreatedAt(new \DateTime());
         $user->setUpdatedAt(new \DateTime());
-        var_dump($user->getName());
         $isAdminString = ($user->getIsAdmin() ? "admin" : "user");
-        var_dump($isAdminString);
         $user->setSignature(hash_hmac('sha256', $user->getName() . $isAdminString, 'secretsecure2023randompasswordextremlyfiable'));
 
         $this->entityManager->persist($user);
@@ -32,6 +33,7 @@ class UserService
 
         return $user;
     }
+
     public function checkEmailExists($email)
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);

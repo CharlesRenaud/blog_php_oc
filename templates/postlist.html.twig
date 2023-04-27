@@ -1,18 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-{% endblock %}
-
 {% block content %}
-    <h1>Liste des articles</h1>
-    <div style={marginBottom:"20px"}>
-        {% for post in posts %}
-            <p>Par : {{ post.author.name }}</p>
-            <p>Titre : {{ post.title }}</p>
-            <p>Publication : {{ post.content }}</p>
-            <p>Post ID : {{ post.id }}</p>
-            <a href="/blog_php_oc/post/{{ post.id }}">Go</a>
-        {% endfor %}
-    </div>
+
+	<h1 class="titre-1 titre-postList">Mes réalisations, lors de mon alternance chez
+		<a class="link" href="https://agence71.fr/">L'agence 71</a>
+	</h1>
+	<div class="carrousel-container">
+		<button id="arrow-left" class="arrow arrow-left"></button>
+		<div class="carrousel">
+			<div class="carrousel-inner">
+				{% for post in posts|reverse %}
+					<div class="article">
+						<div class="article-content-box">
+                                                    <a target="_blank"title="Visiter le site" class="visit-site" href='{{ post.externalUrl}}' ></a>
+
+							<h2>{{ post.title }}</h2>
+							<p>
+								{{ post.claim}}
+                            </p>
+							<a class="link link-post" href="/blog_php_oc/post/{{ post.id }}">Lire la suite</a>
+						</div>
+						<img class="cover-img" src='/blog_php_oc/uploads/{{post.coverImage}}'/>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<button id="arrow-right" class="arrow arrow-right"></button>
+	</div>
 {% endblock %}

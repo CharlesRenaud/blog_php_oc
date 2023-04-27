@@ -29,20 +29,38 @@ class HomeController
 
     public function index(Request $request)
     {
+
+        // Vérifier si les nombres aléatoires sont déjà définis
+        $_SESSION['number1'] = isset($_SESSION['number1']) ? $_SESSION['number1'] : rand(0, 9);
+        $_SESSION['number2'] = isset($_SESSION['number2']) ? $_SESSION['number2'] : rand(0, 9);
+    
+        $number1 = $_SESSION["number1"];
+        $number2 = $_SESSION["number2"];
+    
+
         if ($request->getMethod() === 'POST') {
-            // Validation des données soumises
             $data = [
                 'name' => $request->request->get('name'),
                 'email' => $request->request->get('email'),
-                'message' => $request->request->get('message')
+                'message' => $request->request->get('message'),
+                'maths' => $request->request->get('maths')
             ];
             $errors = $this->validateFormData($data);
+
+            // Validation de la réponse à la question mathématique
+            var_dump($number1);
+            var_dump($number2);
+            var_dump($number1 + $number2);
+            if (intval($data['maths']) !== ($number1 + $number2)) {
+                $errors['maths'] = "La réponse à la question de mathématiques est incorrecte. Veuillez réessayer.";
+            }
+
             if (count($errors) > 0) {
                 return new Response($this->twig->render('error.html.twig', [
                     'errors' => $errors
                 ]));
             }
-    
+
             // Envoi de l'e-mail
             $message = (new \Swift_Message('Nouveau message depuis le formulaire de contact'))
                 ->setFrom([self::FROM_EMAIL => self::FROM_NAME])
@@ -51,21 +69,33 @@ class HomeController
                     sprintf("Nom : %s\nEmail : %s\n\nMessage : \n%s", $data['name'], $data['email'], $data['message']),
                     'text/plain'
                 );
-    
+
             $result = $this->mailer->send($message);
-    
+
             // Affichage d'une réponse
             if ($result) {
-                return new Response($this->twig->render('success.html.twig'));
+                // Render the success template with the message and goTo variables
+                $_SESSION['number1'] = rand(0, 9);
+                $_SESSION['number2'] = rand(0, 9);
+
+                unset($_SESSION['number2']);
+
+                return new Response($this->twig->render('success.html.twig', [
+                    'message' => 'Message envoyé avec succès, redirection en cours ...',
+                    'goTo' => '/blog_php_oc/'
+                ]));
             } else {
                 return new Response($this->twig->render('error.html.twig'));
             }
         }
-    
-        // Affichage du formulaire
-        return new Response($this->twig->render('home.html.twig'));
+
+        // Affichage du formulaire avec les nombres aléatoires
+        return new Response($this->twig->render('home.html.twig', [
+            'number1' => $number1,
+            'number2' => $number2
+        ]));
     }
-    
+
 
     private function validateFormData(array $data)
     {
@@ -74,6 +104,8 @@ class HomeController
             'name' => new Assert\NotBlank(),
             'email' => new Assert\Email(),
             'message' => new Assert\NotBlank(),
+            'maths' => new Assert\NotBlank(),
+
         ]);
 
         $violations = $validator->validate($data, $constraints);

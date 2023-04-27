@@ -27,6 +27,7 @@
         "m6web/php-cs-fixer-config": "2.0.0",
         "twig/intl-extra": "^3.5",
         "symfony/mime": "^6.2",
-        "symfony/asset": "^6.2"
+        "symfony/asset": "^6.2",
+        "google/recaptcha": "^1.3"
     }
 }

@@ -1,36 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block content %}
-    <section class="hero">
-        <div class="hero-content">
-            <p>Charles Renaud, le développeur qu'il vous faut !</p>
-            <div class="photo-charles"></div>
-        </div>
-    </section>
-    <section class="contact-form">
-        <h2>Contactez-moi</h2>
-        <form method="POST">
-            <div>
-                <label for="name">Nom et prénom</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div>
-                <label for="email">E-mail de contact</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div>
-                <label for="message">Message</label>
-                <textarea id="message" name="message"></textarea>
-            </div>
-            <div>
-                <button type="submit">Envoyer</button>
-            </div>
-        </form>
-        <div>
-                <a href="#">Télécharger mon CV</a>
-                <a href="https://github.com/CharlesRenaud">Mon github</a>
-        </div>
-    </section>
+
+	<section class="hero">
+		<div class="hero-content">
+			<div class="photo-charles">
+				<div class="overlay">
+					<p class="text">COUCOU !</p>
+				</div>
+			</div>
+			<div class="box-rs">
+				<p class="titre-1">Charles Renaud,
+					<span class="titre-1-sub"><br/>le développeur qu'il vous faut !</span>
+				</p>
+				<div class="rs">
+					<a title="Télécharge mon CV" class="logo-rs cv" href="#"></a>
+					<a title="Visite mon Github" class="logo-rs github" href="https://github.com/CharlesRenaud"></a>
+					<a title="Visite mon Linkedin" class="logo-rs linkedin" href="https://www.linkedin.com/in/charles-renaud-10/"></a>
+				</div>
+			</div>
+			<div class="skills-box">
+				<div title="php" class="logo-skills php"></div>
+				<div title="javascript" class="logo-skills js"></div>
+				<div title="linux" class="logo-skills linux"></div>
+				<div title="wordpress" class="logo-skills wordpress"></div>
+				<div title="symfony" class="logo-skills symfony"></div>
+				<div title="react" class="logo-skills react"></div>				
+				<div title="nodejs" class="logo-skills nodejs"></div>
+				<div title="mysql" class="logo-skills mysql"></div>
+				<div title="mongodb" class="logo-skills mongodb"></div>
+			</div>
+
+		</div>
+	</section>
+	<section class="contact-form">
+		<div class='form-box'>
+			<h2 class="titre-2">Contactez-moi
+			</h2>
+			<form method="POST">
+				<div class="col-gauche">
+					<div>
+						<label for="name">Nom et prénom</label>
+						<input type="text" id="name" name="name">
+					</div>
+					<div>
+						<label for="email">E-mail de contact</label>
+						<input type="email" id="email" name="email">
+					</div>
+					<div class="plane-img"></div>
+				</div>
+				<div class="col-droite">
+					<div>
+						<label for="message">Message</label>
+						<textarea id="message" name="message"></textarea>
+					</div>
+					<div class="modal-calcul">
+						<label class="titre-2" for="maths">Veuillez résoudre cette addition:</label>
+						<p class="calcul">
+							{{ number1 }}
+							+
+							{{ number2 }}
+							=
+							<input type="text" id="maths" name="maths">
+
+						</p>
+						<button type="submit">Envoyer mon message</button>
+					</div>
+					<div class="send-box">
+						<div id='form-checker'>Vérifier</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="image-contact-bg">
+			<button class="secret">Zone des devs, ne pas cliquer !</button>
+		</div>
+		<div class="console">
+			<span id="command"></span>
+			<span id="cursor">|</span>
+		</div>
+
+	</section>
 {% endblock %}

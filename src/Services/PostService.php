@@ -50,12 +50,14 @@ class PostService
         return $this->entityManager->getRepository(Post::class)->find($postId);
     }
 
-    public function createPost($title, $content, $author, $coverImage)
+    public function createPost($title, $content, $author, $coverImage, $externalUrl, $claim)
     {
         $post = new Post();
         $post->setTitle($title);
         $post->setContent($content);
         $post->setAuthor($author);
+        $post->setExternalUrl($externalUrl);
+        $post->setClaim($claim);
         $post->setCreatedAt(new \DateTime());
         if ($coverImage) {
             $post->setCoverImage($coverImage);
@@ -66,7 +68,7 @@ class PostService
     }
     
 
-    public function updatePost($postId, $title, $content, $coverImage)
+    public function updatePost($postId, $title, $content, $coverImage, $externalUrl, $claim)
     {
         $post = $this->entityManager->getRepository(Post::class)->find($postId);
         if (!$post) {
@@ -76,6 +78,8 @@ class PostService
         $post->setTitle($title);
         $post->setContent($content);
         $post->setCoverImage($coverImage);
+        $post->setExternalUrl($externalUrl);
+        $post->setClaim($claim);
         $this->entityManager->flush();
         return $post;
     }

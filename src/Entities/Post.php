@@ -58,6 +58,15 @@ class Post
      */
     private $coverImage;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $externalUrl;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $claim;
 
     public function __construct()
     {
@@ -143,5 +152,22 @@ class Post
     {
         $this->coverImage = $coverImage;
     }
-    
+    public function getExternalUrl()
+    {
+        return $this->externalUrl;
+    }
+
+    public function setExternalUrl(String $externalUrl)
+    {
+        $this->externalUrl = $externalUrl;
+    }
+    public function getClaim()
+    {
+        return $this->claim;
+    }
+
+    public function setClaim(String $claim)
+    {
+        $this->claim = $claim;
+    }
 }

@@ -75,7 +75,11 @@ class SessionController
             }
             $user = $userService->createUser($data);
             if ($user) {
-                return new Response($this->twig->render('success.html.twig'));
+                // Render the success template with the message and goTo variables
+                return new Response($this->twig->render('success.html.twig', [
+                    'message' => 'Utilisateur Enrengistré, redirection vers la page de connexion',
+                    'goTo' => '/blog_php_oc/login'
+                ]));
             } else {
                 return new Response("Une erreur est survenue lors de l'inscription", Response::HTTP_INTERNAL_SERVER_ERROR);
             }
@@ -86,5 +90,12 @@ class SessionController
     {
         session_destroy();
         return new RedirectResponse('/blog_php_oc/');
+    }
+    public function serveCss(Request $request)
+    {
+        $content = file_get_contents(__DIR__ . '/../../assets/styles/base.css');
+
+        $response = new Response($content, Response::HTTP_OK, ['Content-Type' => 'text/css']);
+        return $response;
     }
 }
