@@ -25,8 +25,6 @@ class UserService
         $user->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
         $user->setCreatedAt(new \DateTime());
         $user->setUpdatedAt(new \DateTime());
-        $isAdminString = ($user->getIsAdmin() ? "admin" : "user");
-        $user->setSignature(hash_hmac('sha256', $user->getName() . $isAdminString, 'secretsecure2023randompasswordextremlyfiable'));
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
