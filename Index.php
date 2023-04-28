@@ -90,6 +90,8 @@ $router->map('POST', '/blog_php_oc/post/add-comment/[i:id]', 'PostController#add
 $router->map('GET', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post_form');
 $router->map('POST', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post');
 $router->map('POST', '/blog_php_oc/post/delete-post/[i:id]', 'PostController#deletePost', 'delete_post');
+
+$router->map('GET', '/blog_php_oc/post/edit-post/[i:id]', 'PostController#editPost', 'edit_post_form');
 $router->map('POST', '/blog_php_oc/post/edit-post/[i:id]', 'PostController#editPost', 'edit_post');
 
 $router->map('GET', '/blog_php_oc/login', 'SessionController#login', 'session_login_form');

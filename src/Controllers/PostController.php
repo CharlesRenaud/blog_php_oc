@@ -35,7 +35,7 @@ class PostController
         $html = $this->twig->render('postlist.html.twig', ['posts' => $posts]);
         return new Response($html);
     }
-    
+
     public function Post($postId): Response
     {
         $post = $this->postService->getPostWithComments($postId);
@@ -164,38 +164,56 @@ class PostController
         $postId = $match['params']['id'];
         $post = $this->postService->getPostById($postId);
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
-        $coverImage = $request->files->get('coverImage');
         $externalUrl = $request->get('externalUrl');
         $claim = $request->get('claim');
-        if ($coverImage) {
-            $fileName = uniqid() . '.' . $coverImage->guessExtension();
-            $coverImage->move('uploads', $fileName);
-        }
+        $coverImage = $request->files->get('coverImage');
+        $existingCoverImage = $post->getCoverImage();
         $errors = [];
-        if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
-            $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
-        }
-        $title = $request->request->get('title');
-        $content = $request->request->get('content');
-        if (empty($title)) {
-            $errors[] = "Le titre est manquant, erreur !";
-        }
-        if (empty($content)) {
-            $errors[] = "Le contenu est manquant, erreur !";
-        }
-        if (!empty($errors)) {
+
+        // Si le formulaire est soumis
+        if ($request->isMethod('POST')) {
+            if ($coverImage) {
+                // Enregistrer la nouvelle image de couverture
+                $fileName = uniqid() . '.' . $coverImage->guessExtension();
+                $coverImage->move('uploads', $fileName);
+            } else {
+                // Conserver l'image de couverture existante
+                $fileName = $existingCoverImage;
+            }
+
+            if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
+                $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
+            }
+            $title = $request->request->get('title');
+            $content = $request->request->get('content');
+            if (empty($title)) {
+                $errors[] = "Le titre est manquant, erreur !";
+            }
+            if (empty($content)) {
+                $errors[] = "Le contenu est manquant, erreur !";
+            }
+            if (!empty($errors)) {
+                return new Response($this->twig->render('editpost.html.twig', [
+                    'errors' => $errors,
+                    'post' => $post,
+                    'title' => $title,
+                    'content' => $content,
+                    'coverImage' => $coverImage
+                ]));
+            } else {
+                $this->postService->updatePost($postId, $title, $content, $fileName, $externalUrl, $claim);
+                $_SESSION['success'] = "Post modifié avec succès";
+                return new RedirectResponse('/blog_php_oc/post/' . $postId);
+            }
+        } else {
+            // Si le formulaire est affiché pour la première fois
             return new Response($this->twig->render('editpost.html.twig', [
                 'errors' => $errors,
                 'post' => $post,
-                'title' => $title,
-                'content' => $content,
-                'coverImage' => $coverImage
-
+                'title' => $post->getTitle(),
+                'content' => $post->getContent(),
+                'coverImage' => $existingCoverImage
             ]));
-        } else {
-            $this->postService->updatePost($postId, $title, $content, $coverImage, $externalUrl, $claim);
-            $_SESSION['success'] = "Post modifié avec succès";
-            return new RedirectResponse('/blog_php_oc/post/' . $postId);
         }
     }
 

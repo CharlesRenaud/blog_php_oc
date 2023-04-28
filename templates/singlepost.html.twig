@@ -6,6 +6,14 @@
 {% endblock %}
 
 {% block content %}
+	{% if isAdmin %}
+		<li>
+			<a href="{{ path('edit_post', {'id': post.id}) }}">Editer</a>
+		</li>
+		<form action="{{ path('delete_post', {'id': post.id}) }}" method="post">
+			<button type="submit">Supprimer</button>
+		</form>
+	{% endif %}
 	{% if post.coverImage %}
 		<img src="http://localhost/blog_php_oc/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
 	{% endif %}
