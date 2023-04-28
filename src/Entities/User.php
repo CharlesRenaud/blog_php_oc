@@ -48,23 +48,11 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $password;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $signature;
+
 
     public function getId()
     {
         return $this->id;
-    }
-    public function getSignature()
-    {
-        return $this->signature;
-    }
-
-    public function setSignature($signature)
-    {
-        $this->signature = $signature;
     }
 
     public function getName()
