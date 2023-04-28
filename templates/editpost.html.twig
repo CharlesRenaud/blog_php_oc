@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition{% endblock %}
+
+{% block content %}
+    <h1 class="titre-1 titre-auth">Edition</h1>
+    <form method="post" action="{{ path('edit_post', {'id': post.getId}) }}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{ title ? title : post.getTitle }}" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Contenu</label>
+            <textarea name="content" id="content" class="form-control" required>{{ content ? content : post.getContent }}</textarea>
+        </div>
+		<div class="form-group">
+			<label for="coverImage">Image de couverture</label>
+			<input type="file" class="form-control-file" id="coverImage" name="coverImage">
+		</div>
+        <div class="form-group">
+            <label for="externalUrl">URL externe</label>
+            <input type="url" name="externalUrl" id="externalUrl" class="form-control" value="{{ externalUrl ? externalUrl : post.getExternalUrl }}">
+        </div>
+        <div class="form-group">
+            <label for="claim">Claim</label>
+            <input type="text" name="claim" id="claim" class="form-control" value="{{ claim ? claim : post.getClaim }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+{% endblock %}

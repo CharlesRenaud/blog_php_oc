@@ -77,7 +77,9 @@ class PostService
 
         $post->setTitle($title);
         $post->setContent($content);
-        $post->setCoverImage($coverImage);
+        if ($coverImage) {
+            $post->setCoverImage($coverImage);
+        }        
         $post->setExternalUrl($externalUrl);
         $post->setClaim($claim);
         $this->entityManager->flush();
