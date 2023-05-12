@@ -14,8 +14,12 @@
 				<nav class="navbar">
 					{% if user.authenticated %}
 						{% if user.is_admin %}
-							<p>Bienvenue
-								{{ user.name }}</p>
+							{% if app.request.pathinfo == path('home') %}
+								<p>Bienvenue
+									{{ user.name }}</p>
+							{% else %}
+								<p></p>
+							{% endif %}
 							<ul class="menu">
 								<li>
 									<a href="/blog_php_oc/">Accueil</a>
@@ -31,8 +35,12 @@
 								</li>
 							</ul>
 						{% else %}
-							<p>Bienvenue
-								{{ user.name }}</p>
+							{% if app.request.pathinfo == path('home') %}
+								<p>Bienvenue
+									{{ user.name }}</p>
+							{% else %}
+								<p></p>
+							{% endif %}
 							<ul class="menu">
 								<li>
 									<a href="/blog_php_oc/">Accueil</a>
@@ -46,8 +54,11 @@
 							</ul>
 						{% endif %}
 					{% else %}
-						<p>
-							Devcarl</p>
+							{% if app.request.pathinfo == path('home') %}
+								<p>Devcarl</p>
+							{% else %}
+								<p></p>
+							{% endif %}
 						<ul class="menu">
 							<li>
 								<a href="/blog_php_oc/">Accueil</a>
@@ -83,3 +94,4 @@
 			</div>
 		</body>
 	</html>
+</body></html>

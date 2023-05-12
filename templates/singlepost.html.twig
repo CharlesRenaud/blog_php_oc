@@ -1,83 +1,107 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Blog -
+{% block title %}
+	Blog -
 	{{ post.title }}
 {% endblock %}
 
 {% block content %}
-	{% if isAdmin %}
-		<li>
-			<a href="{{ path('edit_post', {'id': post.id}) }}">Editer</a>
-		</li>
-		<form action="{{ path('delete_post', {'id': post.id}) }}" method="post">
-			<button type="submit">Supprimer</button>
-		</form>
-	{% endif %}
-	{% if post.coverImage %}
-		<img src="http://localhost/blog_php_oc/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
-	{% endif %}
-	<h1 class="titre-1">{{ post.title }}</h1>
-	<p>{{ post.content }}</p>
-	<p>Publié le
-		{{ post.createdAt|date('F j, Y') }}</p>
-	<h2>Commentaires validés</h2>
-	{% for comment in post.getValidatedComments %}
-
-		<p>{{ comment.content }}</p>
-		<p>Par
-			{{ comment.author.name }}
-			le
-			{{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+	<div class="single-post-wrapper">
+		<div class="single-post-banner">
+			{% if post.coverImage %}
+				<img src="http://localhost/blog_php_oc/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
+				<div class="cover-opacity"></div>
+			{% endif %}
+		</div>
+		<div class="single-post-content-wrapper">
+			<div class="single-post-title-wrapper">
+				<a target="_blank" title="Visiter le site" class="visit-site" href='{{ post.externalUrl}}'></a>
+				<h1 class="titre-1">
+					{{ post.title }}
+				</h1>
+			</div>
+			<p>{{ post.content }}</p>
+			<p>Publié le
+				{{ post.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</p>
 			{% if isAdmin %}
-				<form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
-					<button type="submit">Supprimer</button>
-				</form>
+				<div class="admin-tool">
+					<a href="{{ path('edit_post', {'id': post.id}) }}">Editer</a>
+					<form action="{{ path('delete_post', {'id': post.id}) }}" method="post">
+						<button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce post ?')">Supprimer</button>
+					</form>
+				</div>
 			{% endif %}
-		{% endfor %}
-
-		{% if isAuthenticated and not isAdmin %}
-			<h2>Vos commentaires en attente d'une validation</h2>
-			{% for comment in post.getComments %}
-				{% if not comment.getIsValidated and comment.author.id == userId %}
-					<div class="opacity-comment">
-						<p>{{ comment.getContent }}</p>
-						<p>En attente de validation</p>
+		</div>
+		<div id='ancre-comment' class="single-post-comment-wrapper">
+			<h2>Commentaires
+				<span class="toogle-comment"></span>
+			</h2>
+			{% for comment in post.getValidatedComments %}
+				<div class="comment-wrapper">
+					<p>{{ comment.content }}</p>
+					<div class="comemnt-infos">
+						<p>
+							Par
+							<span>{{ comment.author.name }}</span>
+							le {{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+						</p>
+						{% if isAdmin %}
+							<form class="delete-comment-form" action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
+								<button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</button>
+							</form>
+						{% endif %}
 					</div>
-				{% endif %}
+				</div>
 			{% endfor %}
-		{% endif %}
-
-		{% if post.getComments is not empty and post.getComments|filter(c => not c.getIsValidated)|length > 0 and isAdmin %}
-			<h2>Adminsitrer les commentaires en attentes</h2>
-			{% for comment in post.getComments %}
-				{% if not comment.getIsValidated %}
-					<div class="opacity-comment">
-						<p>{{ comment.getContent }}</p>
-						<p>En attente de validation</p>
-						<form action="{{ path('validate_comment', {'id': comment.id}) }}" method="post">
-							<button type="submit">Valider</button>
-						</form>
-						<form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
-							<button type="submit">Supprimer</button>
-						</form>
-					</div>
-				{% endif %}
-			{% endfor %}
-		{% endif %}
 
 
-		{% if isAuthenticated %}
-			<h2>Ajoute un commentaire</h2>
-			{% if app.session.has('success') %}
-				<div class="alert alert-success">{{ app.session.get('success') }}</div>
+			{% if isAuthenticated and not isAdmin %}
+				<h2>Vos commentaires en attente d'une validation</h2>
+				{% for comment in post.getComments %}
+					{% if not comment.getIsValidated and comment.author.id == userId %}
+						<div class="opacity-comment">
+							<p>{{ comment.getContent }}</p>
+							<p>En attente de validation</p>
+						</div>
+					{% endif %}
+				{% endfor %}
 			{% endif %}
-			<form action="{{ path('add_comment', {'id': post.id}) }}" method="post">
-				<textarea name="content" cols="30" rows="10"></textarea>
-				<br>
-				<input type="submit" value="Publier mon commentaire">
-			</form>
-		{% endif %}
+
+			{% if post.getComments is not empty and post.getComments|filter(c => not c.getIsValidated)|length > 0 and isAdmin %}
+				<h2>Adminsitrer les commentaires en attentes</h2>
+				{% for comment in post.getComments %}
+					{% if not comment.getIsValidated %}
+						<div class="opacity-comment">
+							<p>{{ comment.getContent }}</p>
+							<p>En attente de validation</p>
+							<form action="{{ path('validate_comment', {'id': comment.id}) }}" method="post">
+								<button type="submit">Valider</button>
+							</form>
+							<form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
+								<button type="submit">Supprimer</button>
+							</form>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 
 
-	{% endblock %}
+			{% if isAuthenticated %}
+				<div class="single-post-add-comment-wrapper">
+					{% if app.session.has('success') %}
+						<div class="alert alert-success">{{ app.session.get('success') }}</div>
+					{% endif %}
+					<form action="{{ path('add_comment', {'id': post.id}) }}" method="post">
+						<h2>Ajoute un commentaire</h2>
+						<div>
+							<textarea name="content" cols="30" rows="10"></textarea>
+							<br>
+							<input type="submit" value="Publier mon commentaire">
+						</div>
+					</form>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

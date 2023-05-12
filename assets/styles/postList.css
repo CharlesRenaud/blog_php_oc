@@ -54,7 +54,7 @@
   }
 
   .article {
-    flex: 0 0 32.5%;
+    flex: 0 0 33%;
     box-sizing: border-box;
     text-align: center;
     background-color: #f5f5f5;
@@ -71,7 +71,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    object-fit: contain;
+    object-fit: cover;
   }
 
 .article-content-box {
@@ -125,4 +125,34 @@
 }
 .visit-site:hover {
     opacity: 0.75;
+}
+
+.disclaimer {
+  max-width: 1600px !important;
+  width: 100%;
+  margin: auto !important;
+  font-family: var(--poppins);
+  color: var(--purple);
+  font-weight: 600;
+  margin-top: 20px !important;
+}
+
+@media all and (max-width: 1200px) {
+  .article {
+    flex: 0 0 50%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    margin-right: 20px;
+    position: relative;
+    height: 350px;
+    display: flex;
+  }
+  @media all and (max-width: 768px) {
+    .article {
+      flex: 0 0 100% !important;
+    }
+
+}
 }

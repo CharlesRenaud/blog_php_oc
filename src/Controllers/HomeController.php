@@ -18,8 +18,8 @@ class HomeController
     private const FROM_NAME = 'Le blog OC';
     private const TO_EMAIL = 'smtpocblogtest@gmail.com';
 
-    private $twig;
-    private $mailer;
+    private Environment $twig;
+    private Swift_Mailer $mailer;
 
     public function __construct(Environment $twig, Swift_Mailer $mailer)
     {
@@ -27,16 +27,16 @@ class HomeController
         $this->mailer = $mailer;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
 
         // Vérifier si les nombres aléatoires sont déjà définis
         $_SESSION['number1'] = isset($_SESSION['number1']) ? $_SESSION['number1'] : rand(0, 9);
         $_SESSION['number2'] = isset($_SESSION['number2']) ? $_SESSION['number2'] : rand(0, 9);
-    
+
         $number1 = $_SESSION["number1"];
         $number2 = $_SESSION["number2"];
-    
+
 
         if ($request->getMethod() === 'POST') {
             $data = [
@@ -48,9 +48,6 @@ class HomeController
             $errors = $this->validateFormData($data);
 
             // Validation de la réponse à la question mathématique
-            var_dump($number1);
-            var_dump($number2);
-            var_dump($number1 + $number2);
             if (intval($data['maths']) !== ($number1 + $number2)) {
                 $errors['maths'] = "La réponse à la question de mathématiques est incorrecte. Veuillez réessayer.";
             }
@@ -74,7 +71,6 @@ class HomeController
 
             // Affichage d'une réponse
             if ($result) {
-                // Render the success template with the message and goTo variables
                 $_SESSION['number1'] = rand(0, 9);
                 $_SESSION['number2'] = rand(0, 9);
 
@@ -96,8 +92,7 @@ class HomeController
         ]));
     }
 
-
-    private function validateFormData(array $data)
+    private function validateFormData(array $data): array
     {
         $validator = Validation::createValidator();
         $constraints = new Assert\Collection([
@@ -105,7 +100,6 @@ class HomeController
             'email' => new Assert\Email(),
             'message' => new Assert\NotBlank(),
             'maths' => new Assert\NotBlank(),
-
         ]);
 
         $violations = $validator->validate($data, $constraints);

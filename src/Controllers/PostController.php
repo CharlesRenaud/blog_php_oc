@@ -16,12 +16,12 @@ use App\Services\UserService;
 
 class PostController
 {
-    private $twig;
-    private $postService;
-    private $commentService;
-    private $userService;
+    private Environment $twig;
+    private PostService $postService;
+    private CommentService $commentService;
+    private UserService $userService;
 
-    public function __construct(Environment $twig, PostService $postService,  CommentService $commentService,  UserService $userService)
+    public function __construct(Environment $twig, PostService $postService, CommentService $commentService, UserService $userService)
     {
         $this->twig = $twig;
         $this->postService = $postService;
@@ -36,7 +36,7 @@ class PostController
         return new Response($html);
     }
 
-    public function Post($postId): Response
+    public function Post(int $postId): Response
     {
         $post = $this->postService->getPostWithComments($postId);
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
@@ -50,7 +50,8 @@ class PostController
         ]);
         return new Response($html);
     }
-    public function addComment(Request $request, $match)
+
+    public function addComment(Request $request, array $match)
     {
         $postId = $match["params"]["id"];
         $content = $request->request->get('content');
@@ -80,15 +81,13 @@ class PostController
                 ]));
             }
         } else {
-            $authorId = $this->userService->getUser($_SESSION['user_id']);
+            $authorId = $_SESSION['user_id'];
             $this->commentService->createComment($content, $postId, $authorId);
             $_SESSION['success'] = "Commentaire créé avec succès";
             return new RedirectResponse('/blog_php_oc/post/' . $postId);
         }
     }
-
-
-    public function validateComment(Request $request, $match): Response
+    public function validateComment(Request $request, array $match): Response
     {
         $commentId = $match['params']['id'];
         $this->commentService->validateComment($commentId);
@@ -97,7 +96,7 @@ class PostController
         return new RedirectResponse($referer);
     }
 
-    public function deleteComment(Request $request, $match): Response
+    public function deleteComment(Request $request, array $match): Response
     {
         $commentId = $match['params']['id'];
         $this->commentService->deleteComment($commentId);
@@ -106,7 +105,7 @@ class PostController
         return new RedirectResponse($referer);
     }
 
-    public function addPost(Request $request, $match): Response
+    public function addPost(Request $request, array $match): Response
     {
         $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
 
@@ -117,9 +116,11 @@ class PostController
             $externalUrl = $request->request->get('externalUrl');
             $claim = $request->request->get('claim');
             $coverImage = $request->files->get('coverImage');
-            if ($coverImage) {
+            if ($coverImage instanceof UploadedFile) {
                 $fileName = uniqid() . '.' . $coverImage->guessExtension();
                 $coverImage->move('uploads', $fileName);
+            } else {
+                $fileName = null;
             }
 
             $errors = [];
@@ -140,16 +141,10 @@ class PostController
                 ]));
             } else {
                 $authorId = $this->userService->getUser($userId);
-
-
                 $post = $this->postService->createPost($title, $content, $authorId, $fileName, $externalUrl, $claim);
 
-                // Enregistrer l'image de couverture
-
-
-                $postId = $post->getId();
                 $_SESSION['success'] = "Post créé avec succès";
-                return new RedirectResponse('/blog_php_oc/post/' . $postId);
+                return new RedirectResponse('/blog_php_oc/post/' . $post->getId());
             }
         } else {
             // Si la requête est de type GET, on affiche le formulaire vide
@@ -157,9 +152,7 @@ class PostController
         }
     }
 
-
-
-    public function editPost(Request $request, $match): Response
+    public function editPost(Request $request, array $match): Response
     {
         $postId = $match['params']['id'];
         $post = $this->postService->getPostById($postId);
@@ -172,15 +165,13 @@ class PostController
 
         // Si le formulaire est soumis
         if ($request->isMethod('POST')) {
-            if ($coverImage) {
+            if ($coverImage instanceof UploadedFile) {
                 // Enregistrer la nouvelle image de couverture
                 $fileName = uniqid() . '.' . $coverImage->guessExtension();
                 $coverImage->move('uploads', $fileName);
             } else {
-                // Conserver l'image de couverture existante
                 $fileName = $existingCoverImage;
             }
-
             if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
                 $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
             }
@@ -217,7 +208,7 @@ class PostController
         }
     }
 
-    public function deletePost(Request $request, $match): Response
+    public function deletePost(Request $request, array $match): Response
     {
         $postId = $match['params']['id'];
         $post = $this->postService->getPostById($postId);

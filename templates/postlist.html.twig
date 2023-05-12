@@ -9,15 +9,14 @@
 		<button id="arrow-left" class="arrow arrow-left"></button>
 		<div class="carrousel">
 			<div class="carrousel-inner">
-				{% for post in posts|reverse %}
+				{% for post in posts %}
 					<div class="article">
 						<div class="article-content-box">
-                                                    <a target="_blank"title="Visiter le site" class="visit-site" href='{{ post.externalUrl}}' ></a>
-
+							<a target="_blank" title="Visiter le site" class="visit-site" href='{{ post.externalUrl}}'></a>
 							<h2>{{ post.title }}</h2>
 							<p>
 								{{ post.claim}}
-                            </p>
+							</p>
 							<a class="link link-post" href="/blog_php_oc/post/{{ post.id }}">Lire la suite</a>
 						</div>
 						<img class="cover-img" src='/blog_php_oc/uploads/{{post.coverImage}}'/>
@@ -27,4 +26,5 @@
 		</div>
 		<button id="arrow-right" class="arrow arrow-right"></button>
 	</div>
+	<div class="disclaimer">Ces projets ont été réalisés en collaboration avec des graphistes, des rédacteurs, chefs de projet ...</div>
 {% endblock %}

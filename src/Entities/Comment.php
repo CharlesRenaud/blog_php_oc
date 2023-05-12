@@ -16,90 +16,91 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      */
-    private $author;
+    private User $author;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isValidated;
+    private bool $isValidated;
 
     /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $post;
+    private Post $post;
 
 
-    public function getPost()
+    public function getPost(): Post
     {
         return $this->post;
     }
 
-    public function setPost($post)
+    public function setPost(Post $post): void
     {
         $this->post = $post;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent(string $content): void
     {
         $this->content = $content;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getAuthor()
+    public function getAuthor(): User
     {
         return $this->author;
     }
 
-    public function setAuthor(User $author)
+    public function setAuthor(User $author): void
     {
         $this->author = $author;
     }
-    public function getIsValidated()
+
+    public function getIsValidated(): bool
     {
         return $this->isValidated;
     }
 
-    public function setIsValidated($isValidated)
+    public function setIsValidated(bool $isValidated): void
     {
         $this->isValidated = $isValidated;
     }

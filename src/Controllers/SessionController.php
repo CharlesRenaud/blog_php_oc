@@ -14,9 +14,9 @@ use App\Services\UserService;
 class SessionController
 {
 
-    private $entityManager;
-    private $twig;
-    private $userService;
+    private EntityManager $entityManager;
+    private Environment $twig;
+    private UserService $userService;
 
     public function __construct(EntityManager $entityManager, Environment $twig, UserService $userService)
     {
@@ -28,7 +28,7 @@ class SessionController
         $this->userService = $userService;
     }
 
-    public function login(Request $request)
+    public function login(Request $request): Response|RedirectResponse
     {
         if ($request->getMethod() === 'POST') {
             $username = $request->request->get('name');
@@ -45,7 +45,7 @@ class SessionController
                 } else {
                     // Information incorrectes, afficher un message d'erreur
                     return new Response($this->twig->render('login.html.twig', [
-                        'error' => 'Nom ou mot de passe incorect',
+                        'error' => 'Nom ou mot de passe incorrect',
                     ]));
                 }
             } else {
@@ -57,8 +57,11 @@ class SessionController
         } else if ($request->getMethod() === 'GET') {
             return new Response($this->twig->render('login.html.twig'));
         }
+
+        return new Response('', Response::HTTP_BAD_REQUEST);
     }
-    public function register(Request $request)
+
+    public function register(Request $request): Response
     {
         if ($request->getMethod() === 'GET') {
             return new Response($this->twig->render('register.html.twig'));
@@ -77,21 +80,24 @@ class SessionController
             if ($user) {
                 // Render the success template with the message and goTo variables
                 return new Response($this->twig->render('success.html.twig', [
-                    'message' => 'Utilisateur Enrengistré, redirection vers la page de connexion',
+                    'message' => 'Utilisateur Enregistré, redirection vers la page de connexion',
                     'goTo' => '/blog_php_oc/login'
                 ]));
             } else {
                 return new Response("Une erreur est survenue lors de l'inscription", Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
+
+        return new Response('', Response::HTTP_BAD_REQUEST);
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         session_destroy();
         return new RedirectResponse('/blog_php_oc/');
     }
-    public function serveCss(Request $request)
+
+    public function serveCss(Request $request): Response
     {
         $content = file_get_contents(__DIR__ . '/../../assets/styles/base.css');
 
