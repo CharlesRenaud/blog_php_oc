@@ -13,6 +13,12 @@ class UserService
     {
         $this->entityManager = $entityManager;
     }
+
+    /**
+     * @param array $data
+     * @return User
+     * @throws \InvalidArgumentException
+     */
     public function createUser(array $data): User
     {
         $user = new User();
@@ -32,17 +38,30 @@ class UserService
         return $user;
     }
 
-    public function checkEmailExists($email)
+    /**
+     * @param string $email
+     * @return bool
+     */
+    public function checkEmailExists(string $email): bool
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
         return !empty($user);
     }
 
-    public function getUser($id)
+    /**
+     * @param int $id
+     * @return User|null
+     */
+    public function getUser(int $id): ?User
     {
         return $this->entityManager->find(User::class, $id);
     }
-    public function isAdmin($id)
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function isAdmin(int $id): bool
     {
         $user = $this->entityManager->getRepository(User::class)->find($id);
         if ($user) {
@@ -50,13 +69,20 @@ class UserService
         }
         return false;
     }
-    public function editUser(User $user)
+
+    /**
+     * @param User $user
+     */
+    public function editUser(User $user): void
     {
         $user->setUpdatedAt(new \DateTime());
         $this->entityManager->flush();
     }
 
-    public function deleteUser($userId)
+    /**
+     * @param int $userId
+     */
+    public function deleteUser(int $userId): void
     {
         $user = $this->entityManager->getRepository(User::class)->find($userId);
         $this->entityManager->remove($user);

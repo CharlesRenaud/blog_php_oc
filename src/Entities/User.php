@@ -17,103 +17,100 @@ class User
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $email;
+    private string $email;
     
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isAdmin;
+    private bool $isAdmin;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTime $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
     
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
     
-    public function getIsAdmin()
+    public function getIsAdmin(): bool
     {
         return $this->isAdmin;
     }
 
-    public function setIsAdmin($isAdmin)
+    public function setIsAdmin(bool $isAdmin): void
     {
-        if($isAdmin===null){
-            $this->isAdmin = false;
-        }else{
-            $this->isAdmin = $isAdmin;
-        }
+        $this->isAdmin = $isAdmin;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(?\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
-    public function setPassword($password)
+
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }

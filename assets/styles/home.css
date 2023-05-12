@@ -15,14 +15,22 @@ form input, form textarea {
   color: var(--black);
   font-size: 12px;
   font-weight: bold;
+  transition: 0.5s;
 }
 form textarea {
   height: 200px;
 }
+
 form input:focus,
 form textarea:focus {
   border-color: var(--green);
 }
+
+form input:hover {
+  cursor: pointer;
+  border: 2px solid var(--green);
+}
+
 .send-box {
   display: flex;
   justify-content: center;
@@ -31,7 +39,7 @@ form textarea:focus {
   padding : 10px;
 }
 form button {
-  all : unset;
+  font-family: var(--poppins);
   border: 2px solid var(--purple);
   max-width: 60%;
   width: 60%;

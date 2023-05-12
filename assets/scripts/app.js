@@ -194,51 +194,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  const carrouselContainer = document.querySelector('.carrousel-container');
 
-  let position = 0;
-  const articles = document.getElementsByClassName('article');
-  const carrouselInner = document.getElementsByClassName('carrousel-inner')[0];
+  if (carrouselContainer) {
+    let position = 0;
+    const articles = document.getElementsByClassName('article');
+    const carrouselInner = document.getElementsByClassName('carrousel-inner')[0];
 
-  const arrowLeft = document.getElementById('arrow-left');
-  const arrowRight = document.getElementById('arrow-right');
+    const arrowLeft = document.getElementById('arrow-left');
+    const arrowRight = document.getElementById('arrow-right');
 
-  function updateArrowsVisibility() {
-    const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
+    function updateArrowsVisibility() {
+      const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
 
-    arrowLeft.style.visibility = position === 0 ? 'hidden' : 'visible';
-    arrowRight.style.visibility = position >= maxPosition - 20 ? 'hidden' : 'visible';
-  }
-
-
-  function getTotalWidth() {
-    let totalWidth = 0;
-    for (let i = 0; i < articles.length; i++) {
-      totalWidth += articles[i].offsetWidth + 20;
+      arrowLeft.style.visibility = position === 0 ? 'hidden' : 'visible';
+      arrowRight.style.visibility = position >= maxPosition - 20 ? 'hidden' : 'visible';
     }
-    return totalWidth;
-  }
 
-  function move(direction) {
-    const articleWidth = articles[0].offsetWidth + 20;
-    const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
+    function resetPosition() {
+      position = 0;
+      carrouselInner.style.transform = `translateX(0)`;
+      updateArrowsVisibility();
+    }
 
-    position += direction * articleWidth;
-    position = Math.max(0, Math.min(position, maxPosition));
+    function getTotalWidth() {
+      let totalWidth = 0;
+      for (let i = 0; i < articles.length; i++) {
+        totalWidth += articles[i].offsetWidth + 20;
+      }
+      return totalWidth;
+    }
 
-    carrouselInner.style.transform = `translateX(-${position}px)`;
+    function move(direction) {
+      const articleWidth = articles[0].offsetWidth + 20;
+      const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
+
+      position += direction * articleWidth;
+      position = Math.max(0, Math.min(position, maxPosition));
+
+      carrouselInner.style.transform = `translateX(-${position}px)`;
+
+      updateArrowsVisibility();
+    }
+
+    arrowLeft.addEventListener('click', function () {
+      move(-1);
+    });
+
+    arrowRight.addEventListener('click', function () {
+      move(1);
+    });
+
+    window.addEventListener('resize', function () {
+      resetPosition();
+    });
 
     updateArrowsVisibility();
+
   }
-
-  arrowLeft.addEventListener('click', function () {
-    move(-1);
-  });
-
-  arrowRight.addEventListener('click', function () {
-    move(1);
-  });
-
-  updateArrowsVisibility();
 
   // Trigger animation hover post list
   var elements = document.querySelectorAll(".article");
@@ -255,7 +268,62 @@ document.addEventListener("DOMContentLoaded", function () {
     })(i);
   }
 
+
+  // Sélectionne la div avec la classe single-post-wrapper
+  const homeChecker = document.querySelector(".hero");
+
+  // Vérifie si la div existe avant d'exécuter le reste du script
+  if (!homeChecker) {
+    // Sélectionne le premier élément "p" dans la nav avec la classe navbar
+    const navbarParagraph = document.querySelector("nav.navbar p:first-of-type");
+    if (navbarParagraph) {
+      navbarParagraph.textContent = "";
+    }
+    // Vérifie si l'élément existe avant de modifier son contenu
+    if (navbarParagraph) {
+      // Crée un nouveau lien
+      const newLink = document.createElement("a");
+      newLink.textContent = "Retour";
+      newLink.href = "#";
+      newLink.classList.add("arrow-left");
+      newLink.classList.add("arrow");
+      newLink.classList.add("arrow-back");
+      newLink.onclick = function () {
+        history.back();
+        return false;
+      }
+
+      // Ajoute le lien comme enfant de l'élément "p"
+      navbarParagraph.insertBefore(newLink, navbarParagraph.firstChild);
+    }
+  }
+
+  const singlePostCommentWrapper = document.querySelector('.single-post-comment-wrapper');
+
+  if (singlePostCommentWrapper) {
+    let isExpanded = false;
+    const commentHeader = singlePostCommentWrapper.querySelector('h2');
+  
+    commentHeader.addEventListener('click', () => {
+      if (isExpanded) {
+        singlePostCommentWrapper.style.height = '70px';
+        isExpanded = false;
+      } else {
+        singlePostCommentWrapper.style.height = 'auto';
+        isExpanded = true;
+        const commentAnchor = document.querySelector('#ancre-comment');
+        if (commentAnchor) {
+          commentAnchor.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
+  
+
+
+
 })
+
 
 
 

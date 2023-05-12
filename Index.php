@@ -55,11 +55,25 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
 
 // Initialiser twig
 $loader = new FilesystemLoader(__DIR__ . '/templates');
+// Créer une instance de la classe Request
+$request = Request::createFromGlobals();
 
 $twig = new Environment($loader, [
     'locale' => 'fr_FR',
-    'debug' => true
+    'debug' => true,
+    'cache' => false,
+    'globals' => [
+        'app' => [
+            'request' => $request,
+        ],
+    ],
 ]);
+
+// Ajouter la variable app.request.uri à tous les templates Twig
+$twig->addGlobal('app', [
+    'request' => $request,
+]);
+
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $twig->addExtension(new \Twig\Extra\Intl\IntlExtension());
@@ -71,6 +85,8 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = [])
 
 // Ajoutez la variable user à tous les templates qui étendent bas.html.twig
 $twig->addGlobal('user', $user);
+
+
 
 
 // Initaliser les services

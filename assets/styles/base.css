@@ -38,6 +38,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+  overflow: hidden;
 }
 
 

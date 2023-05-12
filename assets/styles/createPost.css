@@ -1,0 +1,69 @@
+.post-form {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    box-sizing: border-box;
+    padding : 40px;
+}
+
+.post-form .form-group {
+    flex-basis: 49.1% !important;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.post-form .form-group label {
+    display: flex;
+    align-self: flex-start;
+    width: 100%;
+    position: relative;
+}
+
+.post-form .form-group input, .post-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100% !important;
+
+}
+
+.post-form .form-group.form-content {
+    flex-basis: 100% !important;
+    align-items: center !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.post-form .form-group.form-content .form-control {
+    width: 100%;
+}
+
+.post-form button {
+    max-width: 195px;
+}
+
+.titre-createPost {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+
+@media all and (max-width: 1250px) {
+    .post-form .form-group {
+        flex-basis: 100% !important;
+    }
+
+}
+
+/* EDIT POST */
+
+.form-edit .form-group:nth-child(3){
+    flex-basis: 100% !important;
+}
+.form-edit .form-group:nth-child(3) textarea{
+    height: 250px !important;
+}
