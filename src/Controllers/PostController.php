@@ -7,12 +7,12 @@ namespace App\Controllers;
 use App\Services\CommentService;
 use App\Services\PostService;
 use App\Services\UserService;
+use Respect\Validation\Validator as v;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
-use Respect\Validation\Validator as v;
 
 class PostController
 {
@@ -96,8 +96,8 @@ class PostController
         $this->commentService->createComment($content, intval($postId), $authorId);
         $_SESSION['success'] = 'Commentaire créé avec succès';
 
-
         header('Location: /post/' . $postId);
+
         exit();
     }
 
@@ -109,6 +109,7 @@ class PostController
         $referer = $request->headers->get('referer');
 
         header('Location: ' . $referer);
+
         exit();
     }
 
@@ -120,6 +121,7 @@ class PostController
         $referer = $request->headers->get('referer');
 
         header('Location: ' . $referer);
+
         exit();
     }
 
@@ -134,6 +136,7 @@ class PostController
             $externalUrl = $request->request->get('externalUrl');
             $claim = $request->request->get('claim');
             $coverImage = $request->files->get('coverImage');
+
             if ($coverImage instanceof UploadedFile) {
                 $fileName = uniqid() . '.' . $coverImage->guessExtension();
                 $coverImage->move('uploads', $fileName);
@@ -165,6 +168,7 @@ class PostController
             $_SESSION['success'] = 'Post créé avec succès';
 
             header('Location: /post/' . $post->getId());
+
             exit();
         }
         // Si la requête est de type GET, on affiche le formulaire vide
@@ -191,6 +195,7 @@ class PostController
             } else {
                 $fileName = $existingCoverImage;
             }
+
             if ($userId !== $post->getAuthor()->getId() && !$this->userService->isAdmin($userId)) {
                 $errors[] = "Vous n'êtes pas autorisé à modifier ce post !";
             }
@@ -218,6 +223,7 @@ class PostController
             $_SESSION['success'] = 'Post modifié avec succès';
 
             header('Location: /post/' . $postId);
+
             exit();
         }
         // Si le formulaire est affiché pour la première fois
@@ -250,8 +256,8 @@ class PostController
         $this->postService->deletePost(intval($postId));
         $_SESSION['success'] = 'Post supprimé avec succès';
 
-
         header('Location: /posts');
+
         exit();
     }
 }

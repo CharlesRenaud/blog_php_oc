@@ -72,10 +72,12 @@ class Post
      * @ORM\Column(type="text")
      */
     private string $claim;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
     }
+
     public function getComments(): Collection
     {
         return $this->comments;
@@ -92,6 +94,7 @@ class Post
     {
         $this->comments = $comments;
     }
+
     public function getId(): int
     {
         return $this->id;
@@ -161,6 +164,7 @@ class Post
     {
         return $this->externalUrl;
     }
+
     public function setExternalUrl(string $externalUrl): void
     {
         $this->externalUrl = $externalUrl;

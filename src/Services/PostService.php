@@ -21,7 +21,6 @@ class PostService
 
     private $commentService;
 
-
     public function __construct(EntityManager $entityManager, CommentService $commentService, UserService $userService)
     {
         $this->entityManager = $entityManager;
@@ -55,7 +54,7 @@ class PostService
     {
         $post = $this->getPostById($postId);
         $validatedComments = $this->commentService->getValidatedCommentsByPostId($postId);
-            $commentsCollection = new ArrayCollection($validatedComments);
+        $commentsCollection = new ArrayCollection($validatedComments);
 
         return $post;
     }
@@ -95,6 +94,7 @@ class PostService
         $post->setExternalUrl($externalUrl);
         $post->setClaim($claim);
         $post->setCreatedAt(new \DateTime());
+
         if ($coverImage) {
             $post->setCoverImage($coverImage);
         }
@@ -125,12 +125,14 @@ class PostService
         ?string $claim
     ): Post {
         $post = $this->entityManager->getRepository(Post::class)->find($postId);
+
         if (!$post) {
             throw new \Exception('Publication introuvable');
         }
 
         $post->setTitle($title);
         $post->setContent($content);
+
         if ($coverImage) {
             $post->setCoverImage($coverImage);
         }
@@ -149,6 +151,7 @@ class PostService
     public function deletePost(int $postId): void
     {
         $post = $this->entityManager->getRepository(Post::class)->find($postId);
+
         if (!$post) {
             throw new \Exception('Publication introuvable');
         }

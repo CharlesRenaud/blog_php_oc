@@ -31,6 +31,7 @@ class Doctrine
             $connection = DriverManager::getConnection($conn);
             self::$entityManager = EntityManager::create($connection, $config);
         }
+
         return self::$entityManager;
     }
 }

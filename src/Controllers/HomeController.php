@@ -10,16 +10,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validation;
 use Twig\Environment;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class HomeController
 {
     private const FROM_EMAIL = 'renaudcharlespro@gmail.com';
+
     private const FROM_NAME = 'Le blog OC';
+
     private const TO_EMAIL = 'smtpocblogtest@gmail.com';
+
     private const EMAIL_SUBJECT = 'Nouveau message depuis le formulaire de contact';
 
     private Environment $twig;
+
     private Swift_Mailer $mailer;
 
     public function __construct(Environment $twig, Swift_Mailer $mailer)
@@ -67,7 +70,7 @@ class HomeController
             if (count($errors) > 0) {
                 return new Response($this->twig->render('error.html.twig', [
                     'errors' => $errors,
-                    
+
                 ]));
             }
 
@@ -120,23 +123,21 @@ class HomeController
             'message' => new Assert\NotBlank(['message' => 'Le message ne peut pas être vide.']),
             'maths' => new Assert\NotBlank(['message' => 'Le champ maths ne peut pas être vide.']),
         ]);
-    
+
         $violations = $validator->validate($data, $constraints);
-    
+
         $errors = [];
-    
+
         foreach ($violations as $violation) {
             $errors[$violation->getPropertyPath()] = $violation->getMessage();
         }
-    
+
         return $errors;
     }
-    
 
     private function generateCsrfToken(): string
     {
-        $token = bin2hex(random_bytes(32));
-        return $token;
+        return bin2hex(random_bytes(32));
     }
 
     private function isCsrfTokenValid(?string $token): bool

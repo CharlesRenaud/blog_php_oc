@@ -34,6 +34,7 @@ class User
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private string $email;
+
     /**
      * @ORM\Column(type="boolean")
      */
@@ -68,6 +69,7 @@ class User
     {
         $this->name = $name;
     }
+
     public function getEmail(): string
     {
         return $this->email;
@@ -77,6 +79,7 @@ class User
     {
         $this->email = $email;
     }
+
     public function getIsAdmin(): bool
     {
         return $this->isAdmin;

@@ -48,7 +48,6 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private Post $post;
-    
 
     public function setPost(Post $post): void
     {

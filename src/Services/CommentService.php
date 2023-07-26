@@ -74,6 +74,7 @@ class CommentService
     public function validateComment(int $commentId): void
     {
         $comment = $this->entityManager->getRepository(Comment::class)->find($commentId);
+
         if ($comment) {
             $comment->setIsValidated(true);
             $this->entityManager->persist($comment);
@@ -87,6 +88,7 @@ class CommentService
     public function deleteComment(int $commentId): void
     {
         $comment = $this->entityManager->getRepository(Comment::class)->find($commentId);
+
         if ($comment) {
             $this->entityManager->remove($comment);
             $this->entityManager->flush();

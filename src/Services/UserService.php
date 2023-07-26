@@ -51,6 +51,7 @@ class UserService
     public function checkEmailExists(string $email): bool
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+
         return !empty($user);
     }
 

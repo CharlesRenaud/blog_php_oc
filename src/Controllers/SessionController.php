@@ -18,7 +18,6 @@ class SessionController
 
     private Environment $twig;
 
-
     public function __construct(EntityManager $entityManager, Environment $twig)
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -34,6 +33,7 @@ class SessionController
             $username = $request->request->get('name');
             $password = $request->request->get('password');
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['name' => $username]);
+
             if ($user) {
                 if (password_verify($password, $user->getPassword())) {
                     // Information correctes, connecter l'utilisateur
@@ -43,6 +43,7 @@ class SessionController
                     $_SESSION['authenticated'] = true;
 
                     header('Location: /');
+
                     exit();
                 }
                 // Information incorrectes, afficher un message d'erreur
@@ -76,6 +77,7 @@ class SessionController
 
             if ($userService->checkEmailExists($data['email'])) {
                 $errors = ["l'email est déjà utilisé"];
+
                 return new Response($this->twig->render('error.html.twig', [
                     'errors' => $errors,
                 ]));
@@ -88,9 +90,10 @@ class SessionController
                 $_SESSION['name'] = $user->getName();
                 $_SESSION['is_admin'] = $user->getIsAdmin();
                 $_SESSION['authenticated'] = true;
-    
+
                 // Redirection to home after successful registration
                 header('Location: /');
+
                 exit();
             }
 
@@ -104,6 +107,7 @@ class SessionController
     {
         session_destroy();
         header('Location: /');
+
         exit();
     }
 }
