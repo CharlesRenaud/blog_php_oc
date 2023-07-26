@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	<div class="container error-message">
+
+		<img class="error-img" src="../assets/images/success-logo.png"/>
+		<h1 class="flash-message">{{ message }}</h1>
+	</div>
+	<script>
+		setTimeout(function () {
+            window.location.href = '{{ goTo }}';
+            }, 
+        3000);
+	</script>
+{% endblock %}

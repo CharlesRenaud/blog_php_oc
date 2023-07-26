@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+	<h1 class="titre-1 titre-postList">Mes réalisations, lors de mon alternance chez
+		<a class="link" href="https://agence71.fr/">L'agence 71</a>
+	</h1>
+	<div class="carrousel-container">
+		<button id="arrow-left" class="arrow arrow-left"></button>
+		<div class="carrousel">
+			<div class="carrousel-inner">
+				{% for post in posts %}
+					<div class="article">
+						<div class="article-content-box">
+							<a target="_blank" title="Visiter le site" class="visit-site" href='{{ post.externalUrl}}'></a>
+							<h2>{{ post.title }}</h2>
+							<p>
+								{{ post.claim}}
+							</p>
+							<a class="link link-post" href="/post/{{ post.id }}">Lire la suite</a>
+						</div>
+						<img class="cover-img" src='/uploads/{{post.coverImage}}'/>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<button id="arrow-right" class="arrow arrow-right"></button>
+	</div>
+	<div class="disclaimer">Ces projets ont été réalisés en collaboration avec des graphistes, des rédacteurs, chefs de projet ...</div>
+{% endblock %}

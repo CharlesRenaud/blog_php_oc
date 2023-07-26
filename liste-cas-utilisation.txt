@@ -1,0 +1,7 @@
+Visitor -> Soumettre le formulaire de contact
+Visitor -> Inscription et Connexion
+
+User -> Publier un commentaire 
+
+Admin -> Gestion des commentaire : (Valider un commenataire, supprimer un commentaire)
+Admin -> Gestion des publications : (Publication d'un un post, editer un post, supprimer un post)

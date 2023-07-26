@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Servir les fichiers statiques directement
+RewriteCond %{REQUEST_URI} ^/uploads/
+RewriteRule . - [L]
+
+# Routage des requêtes vers Symfony
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]

@@ -1,0 +1,593 @@
+
+.rs {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+
+form input, form textarea {
+  all: unset;
+  border: 2px solid var(--purple);
+  max-width: 80%;
+  margin-bottom: 10px;
+  transition: 0.2s;
+  padding: 5px 10px;
+  color: var(--black);
+  font-size: 12px;
+  font-weight: bold;
+  transition: 0.5s;
+}
+form textarea {
+  height: 200px;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--green);
+}
+
+form input:hover {
+  cursor: pointer;
+  border: 2px solid var(--green);
+}
+
+.send-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  padding : 10px;
+}
+form button {
+  font-family: var(--poppins);
+  border: 2px solid var(--purple);
+  max-width: 60%;
+  width: 60%;
+  padding: 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  color: white;
+  background-color: var(--purple);
+  transition: 0.5s;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em;
+}
+form button:hover {
+  background-color: white;
+  color: var(--purple);
+  cursor: pointer;
+}
+
+form label {
+  font-weight: bold;
+}
+.col-gauche {
+  flex-basis: 40%;
+  margin-left: 20px;
+  gap: 10px;
+  display: flex;
+  align-self: flex-start;
+}
+
+.col-gauche > div label{
+  align-items: flex-start;
+  display: flex;
+  width: 90%;
+}
+.col-droite {
+  flex-basis: 60%;
+}
+.col-droite > div {
+  justify-content: center;
+}
+
+
+
+/* Hero section */
+.hero {
+  max-width: 1200px;
+  margin: auto;
+  margin-top:0px;
+  margin-bottom: 40px;
+  width: 100%;
+  background-color: var(--grey-2);
+  padding : 20px 20px;
+  box-sizing: border-box;
+  margin-bottom: 0px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
+  height: auto;
+}
+.hero-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+  height: auto;
+}
+
+.photo-charles {
+  background-image: url('../images/charles.jpg');
+  width: 125px;
+  height: 125px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  border-radius: 30em;
+  margin: 0;
+  border: 5px solid var(--purple);
+  transition: 0.5s;
+  filter: blur(0px);
+  background-position: center;
+  position: relative;
+  z-index: 0;
+}
+
+@media all and (max-width: 768px) {
+  .photo-charles {
+    height: 100px;
+    width: 100px;
+  }
+  .photo-charles .text{
+    font-size: 12px;
+  }
+  .col-gauche {
+    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .box-col-gauche {
+    display: flex;
+    align-items: center;
+  }
+  .col-gauche div {
+    min-width: 80%;
+  }
+
+  .col-gauche input {
+    max-width: 100% !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .col-gauche > div label {
+    width: 100%;
+  }
+  .col-droite  {
+    padding-left: 0px !important;
+    justify-content: center;
+    align-items: center;
+  }
+  .col-droite > div {
+    padding-left: 0px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+    width: 90%;
+  }
+  .col-droite > div label
+   {
+    max-width: 90% !important;
+    width: 90%;
+  }
+  .col-droite > div textarea {
+    max-width: 90% !important;
+    width: 90%;
+    box-sizing: border-box;
+  }
+  .form-box *{
+    font-size: 95% !important;
+  }
+
+}
+
+.photo-charles:hover {
+  border: 5px solid var(--green);
+  background-size: 200%;
+  background-position: 55% -15px;
+}
+
+.plane-img {
+  background-image: url('../images/paper-plane.png');
+  width: 90px;
+  height: 90px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin-left: -40px;
+  margin-top: 20px;
+}
+
+
+.modal-calcul {
+  position: fixed;
+  background-color: white;
+  top: 1000%;
+  left: 1000%;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1002;
+}
+
+.modal-calcul {
+  position: fixed;
+  background-color:  white;
+  top: -100%;
+  left: 0%;
+  width: 100%;
+  height: 0%;
+  z-index: 1002;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.modal-calcul.active {
+  top: 0%;
+  left: 0%;
+  position: fixed;
+  background-color:  white;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+label.titre-2 {
+  width: auto;
+  margin-bottom:10px;
+}
+
+@media all and (max-width: 768px) {
+  .modal-calcul .titre-2 {
+    font-size: 16px !important;
+    text-align: center;
+  }
+  .titre-2 {
+    padding-left: 20px;
+  }
+}
+
+
+.modal-calcul input,
+.modal-calcul button
+ {
+  max-width: 225px;
+  margin: auto;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+@media all and (max-width: 768px) {
+  .modal-calcul button {
+    font-size: 12px !important;
+    width: auto;
+  }
+}
+
+.calcul {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+#maths {
+  display: inline-block;
+  margin : 0 !important;
+  width: 50px
+}
+
+#form-checker {
+  background-color: var(--purple);
+  color: white;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  border: 2px solid var(--purple);
+  width: 80%;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1em;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+  max-width: 150px;
+}
+
+#form-checker:hover {
+  background-color: white;
+  color: var(--purple);
+  cursor: pointer;
+}
+
+#form-checker.active {
+
+}
+#form-checker.active:before {
+  content : "Fermer";
+  position: fixed;
+  z-index: 99999;
+  background-color: var(--purple);
+  color: white;
+  height: 40px;
+  width: 150px;
+  top:20px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1em;
+  transition: 0.5s !important;
+  border: 2px solid var(--purple);
+}
+#form-checker.active:hover:before {
+  background-color: white !important;
+  color: var(--purple)
+}
+
+
+.overlay {
+  position: absolute;
+  visibility: hidden;
+}
+
+.photo-charles:hover .overlay {
+  visibility: visible;
+}
+
+.text {
+  color: black;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin : 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: rotate-text 1s linear infinite;
+  color: var(--purple);
+  font-size: 17px;
+  white-space: nowrap;
+
+}
+
+@keyframes rotate-text {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(25deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-25deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+.console {
+  display: flex;
+  background-color: var(--grey-2);
+  color: var(--purple);
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  overflow: hidden;
+  flex-basis: 48%;
+  width: 45%;
+  height: 100;
+  margin-top: 5%;
+  right: 0;
+  font-weight: bold !important;
+  overflow: scroll;
+  position: absolute;
+  right: 200%;
+  align-self: stretch;
+  max-height: 350px;
+}
+.console.active {
+  position: relative;
+  right: 0%;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
+
+
+}
+.console div {
+  font-style: italic !important;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+#command {
+  text-align: left;
+}
+
+#cursor {
+  animation: blink 0.7s infinite;
+  opacity: 0 !important
+
+}
+
+.image-contact-bg {
+  display: flex;
+  position: relative;
+  background-image: url("../images/contact.png");
+  flex-basis: 50%;
+  height: 100 !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  background-position: 0px 25px;
+  align-self: stretch;
+
+}
+
+.image-contact-bg:before {
+  width: 100%;
+  height: 90%;
+  bottom: 0;
+  position: absolute;
+  background-color: rgb(255, 255, 255, 0);
+  transition: 1s;
+  content : "";
+}
+
+.image-contact-bg:hover:before {
+  content: '';
+  background-color: rgb(255, 255, 255, 0.35);
+}
+.secret {
+  all: unset;
+  position: absolute;
+  color : transparent;
+  background-color: transparent;
+  width: 100%;
+  height: 80%;
+  bottom :0;
+  transition: all 0.5s 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 22px;
+  line-height: 1em;
+}
+.secret.active {
+  color : var(--purple) !important;
+  background-color: var(--grey-2);
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
+
+}
+
+.secret.active.hover {
+    transition-delay: 2s;
+    cursor: pointer;
+}
+
+.hero-content{
+  position: relative;
+  box-sizing: border-box;
+}
+
+.skills-box {
+    height: 130%;
+    flex-basis: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    padding : 0px;
+    width: 200px;
+    justify-content: center;
+    position: absolute;
+    right: -1.8%;
+    box-sizing: border-box;
+    gap: 20px;
+    background-color: rgba(0, 0, 0, 0.035);
+    padding : 10px;
+}
+
+
+.logo-skills {
+  position: relative;
+  flex-basis: 21%;
+  align-self:stretch;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.5s;
+}
+.logo-skills:hover {
+  opacity: 0.6;
+}
+
+@media all and (max-width: 768px) {
+  .skills-box {
+    height: 40px;
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    width: calc(100% + 40px) !important;
+    justify-content: center;
+    position: absolute;
+    right: 0% !important;
+    top: calc(100% + 20px);
+    box-sizing: border-box;
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.035);
+    flex-wrap: nowrap;
+    left: -20px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+
+  }
+  .logo-skills {
+    flex-basis: 15%;
+  }
+  .hero-content {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .photo-charles {
+    margin-bottom: -20px;
+  }
+  #form-checker.active:before {
+    width: 100px;
+  }
+}
+
+
+.php {
+  background-image: url("../images/php.png");
+}
+.js {
+  background-image: url("../images/js.png");
+}
+.linux {
+  background-image: url("../images/linux.png");
+}
+.wordpress {
+  background-image: url("../images/wordpress.png");
+}
+.symfony {
+  background-image: url("../images/symfony.png");
+}
+.react {
+  background-image: url("../images/react.png");
+}
+.nodejs {
+  background-image: url("../images/nodejs.png");
+}
+.mysql {
+
+  background-image: url("../images/mysql.png");
+}
+
+.mongodb {
+  background-image: url("../images/mongodb.png");
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: var(--purple);
+  }
+  
+}

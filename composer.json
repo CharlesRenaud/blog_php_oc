@@ -1,0 +1,39 @@
+{
+    "name": "renau/blog_php_oc",
+    "config": {
+        "encoding": "UTF-8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Renau\\BlogPhpOc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "CharlesRenaud",
+            "email": "renaudcharlespro@gmail.com"
+        }
+    ],
+    
+    "require": {
+        "twig/twig": "^3.5",
+        "doctrine/orm": "^2.14",
+        "symfony/http-foundation": "^6.2",
+        "symfony/routing": "^6.2",
+        "symfony/cache": "^6.2",
+        "doctrine/annotations": "1.14",
+        "symfony/config": "^6.2",
+        "altorouter/altorouter": "^2.0",
+        "symfony/console": "^6.2",
+        "vlucas/phpdotenv": "^5.5",
+        "swiftmailer/swiftmailer": "^6.3",
+        "symfony/validator": "^6.2",
+        "m6web/php-cs-fixer-config": "2.0.0",
+        "twig/intl-extra": "^3.5",
+        "symfony/mime": "^6.2",
+        "symfony/asset": "^6.2",
+        "google/recaptcha": "^1.3",
+        "respect/validation": "^2.2",
+        "symfony/translation": "^6.3"
+    }
+}

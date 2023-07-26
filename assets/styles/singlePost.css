@@ -1,0 +1,417 @@
+.single-post-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.single-post-banner {
+    height: auto !important;
+    position: relative;
+    flex-basis: 65%;
+}
+
+.single-post-banner img {
+    display: block;
+    position: relative;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    object-position: center !important;
+    object-position: 0% 0%;
+    min-height: 500px;
+    max-height: 500px;
+}
+
+.cover-opacity {
+    display: block;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.0) !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.single-post-comment-wrapper {
+    flex-basis: 65%;
+    height: 70px;
+    border-top: 2px solid var(--purple);
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.comment-wrapper {
+    background-color: var(--grey-2);
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
+    padding: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.comment-wrapper p {
+    margin: 0px;
+}
+
+.comment-wrapper>p {
+    margin-bottom: 20px;
+}
+
+.opacity-comment {
+    background-color: var(--grey-2);
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
+    padding: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.opacity-comment p {
+    opacity: 0.5;
+    flex-basis: 100%;
+}
+
+.opacity-comment form {
+    display: flex;
+    opacity: 1 !important;
+    height: 20px;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+    align-items: flex-start !important;
+    justify-self: flex-start !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.opacity-comment form button {
+    max-width: 100%;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.comemnt-infos {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+}
+
+.comemnt-infos span {
+    font-weight: bold;
+    color: var(--purple)
+}
+
+.delete-comment-form {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: block;
+    margin-left: 20px;
+}
+
+.delete-comment-form button {
+    width: 100%;
+    max-width: 100%;
+}
+
+.single-post-comment-wrapper h2 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.single-post-comment-wrapper h2 span {
+    display: inline-block;
+    width: 20px;
+    height: 100%;
+    background-image: url("../images/carousel-arrow-left.png");
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotate(90deg);
+    position: relative;
+    top: 2.5px;
+    transition: 0.2s !important;
+}
+
+.single-post-comment-wrapper.active h2 span {
+    transform: rotate(-90deg);
+}
+
+.single-post-comment-wrapper h2:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.single-post-content-wrapper {
+    flex-basis: 35%;
+    box-sizing: border-box;
+    padding-left: 20px
+}
+
+.admin-tool {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 30px;
+    gap: 10px;
+}
+
+.admin-tool a {
+    all: unset;
+    border: 2px solid var(--purple);
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    color: white;
+    background-color: var(--purple);
+    transition: 0.5s;
+    text-transform: uppercase !important;
+    letter-spacing: 0.025em;
+    flex-basis: 50%;
+    ;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.admin-tool a:hover {
+    background-color: white;
+    cursor: pointer;
+    color: var(--purple)
+}
+
+.admin-tool form {
+    position: relative;
+    padding: 0px;
+    flex-basis: 50%;
+    gap: 0px;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-tool form button {
+    position: relative;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    font-size: 14px;
+}
+
+.single-post-comment-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 70px;
+}
+
+.single-post-add-comment-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto
+}
+
+.single-post-add-comment-wrapper form {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-self: flex-start;
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.single-post-add-comment-wrapper form textarea {
+    height: 120px;
+    width: 400px;
+}
+
+.single-post-add-comment-wrapper form h2 {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+.single-post-add-comment-wrapper form div {
+    display: block;
+}
+
+.single-post-title-wrapper {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.single-post-content-wrapper p:last-child {
+    font-size: 12px;
+}
+
+.single-post-title-wrapper h1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar p {
+    display: flex;
+    align-items: center;
+}
+
+.arrow-back {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    text-decoration: none;
+    color: var(--purple);
+    font-size: 22px;
+    justify-content: center;
+    align-items: center;
+    background-position: 5%;
+    padding-right: 20%;
+
+}
+
+.info-comment {
+    width: 100vw;
+    margin-top: 10px;
+    color: var(--purple);
+}
+.info-comment a,
+.info-comment a:visited
+{
+    color: var(--purple);
+    font-size: 16px;
+    transform: 0.25s;
+}
+.info-comment a:hover {
+    opacity: 0.75;
+}
+
+@media all and (max-width: 768px) {
+    .single-post-comment-wrapper {
+        height: auto !important;
+        max-height: 100000px !important;
+    }
+    .admin-tool {
+        max-width: 70%
+    }
+    .arrow-left.arrow.arrow-back {
+        visibility: visible;
+        background-size: 15px !important;
+    }
+    .arrow-back {
+        background-size: 10px;
+        background-position: 0% center;
+        left: 0px;
+        padding-left: 20px;
+        padding-top: 2px;
+    }
+    .arrow-right, .arrow-left {
+        background-size: 10px;
+    }
+
+    .header {
+        width: 100vw;
+    }
+    .navbar {
+        box-sizing: border-box;
+        width: 100vw;
+    }
+    .navbar p {
+        justify-content: flex-start;
+        width: 100vw;
+        display: flex;
+        position: relative;
+    }
+    .navbar p a {
+        max-width: 100vw !important;
+        width: 50px;
+        justify-content: flex-start;
+        text-align:left;
+        align-items: center;
+        padding-right: 0px !important
+    }
+    .single-post-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+    }
+    .single-post-banner {
+    }
+    .single-post-banner img {
+        min-height: 0;
+        width: 100vw;
+        object-fit: cover;
+        object-position: center;
+        margin-bottom: 20px;
+        height: 250px
+    }
+    .comment-wrapper {
+        padding : 10px;
+
+
+    }
+    .comemnt-infos{
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .delete-comment-form {
+        margin-left: 0px;
+    }
+    .single-post-content-wrapper {
+        width: 100vw;
+        padding-right: 20px;
+    }
+    #ancre-comment {
+        padding: 10px;
+        width: calc(100vw - 20px)
+    }
+    .add-comment-box {
+        width: 100%
+    }
+    .opacity-comment {
+        padding : 10px
+    }
+    .single-post-add-comment-wrapper form {
+        padding : 10px
+    }
+    .add-comment-box textarea {
+        max-width: 90%;
+    }
+
+    .single-post-wrapper {
+        margin-top: 5px !important
+    }
+}

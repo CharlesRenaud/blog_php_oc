@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}Devcarl Blog
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ path('serve_css') }}">
+		<link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon"/>
+	</head>
+	<body>
+		<div id="header">
+			{% block header %}
+				<nav class="navbar">
+					{% if user.authenticated %}
+						{% if user.is_admin %}
+							{% if app.request.pathinfo == path('home') %}
+								<p>Bienvenue
+									{{ user.name }}</p>
+							{% else %}
+								<p class="back"></p>
+							{% endif %}
+							<ul class="menu">
+								<li>
+									<a href="/">Accueil</a>
+								</li>
+								<li>
+									<a href="/posts">Publications</a>
+								</li>
+								<li>
+									<a href="/post/add-post">Publier</a>
+								</li>
+								<li>
+									<a href="/logout">Déconnexion</a>
+								</li>
+							</ul>
+						{% else %}
+							{% if app.request.pathinfo == path('home') %}
+								<p>Bienvenue
+									{{ user.name }}</p>
+							{% else %}
+								<p></p>
+							{% endif %}
+							<ul class="menu">
+								<li>
+									<a href="/">Accueil</a>
+								</li>
+								<li>
+									<a href="/posts">Publications</a>
+								</li>
+								<li>
+									<a href="/logout">Déconnexion</a>
+								</li>
+							</ul>
+						{% endif %}
+					{% else %}
+							{% if app.request.pathinfo == path('home') %}
+								<p>Devcarl</p>
+							{% else %}
+								<p></p>
+							{% endif %}
+						<ul class="menu">
+							<li>
+								<a href="/">Accueil</a>
+							</li>
+							<li>
+								<a href="/posts">Publications</a>
+							</li>
+							<li>
+								<a href="/register">Inscription</a>
+							</li>
+							<li>
+								<a href="/login">Connexion</a>
+							</li>
+						</ul>
+					{% endif %}
+					<div class="burger-menu">
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+					</div>
+				</nav>
+				{% block javascripts %}
+					<script src="{{ path('serve_js') }}"></script>
+				{% endblock %}
+			{% endblock %}
+		</div>
+		<div id="content"> {% block content %}{% endblock %}
+			</div>
+			<div id="footer">
+				{% block footer %}
+					<p>Copyright ©2023, tous droits réservés.</p>
+				{% endblock %}
+			</div>
+		</body>
+	</html>
+</body></html>

@@ -1,0 +1,36 @@
+.flash-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message a,
+.error-message a:visited
+{
+    color: var(--purple);
+    transition: 0.25s;
+}
+
+.error-message a:hover {
+    opacity: 0.75;
+}
+
+.error-img {
+    max-width: 180px;
+}
+
+@media all and (max-width: 768px) {
+    .error-img {
+        max-width: 60px;
+    }
+    .flash-message {
+        text-align: center;
+    }
+}
