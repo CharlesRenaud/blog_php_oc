@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__ . '/src/Controllers/HomeController.php';
 require_once __DIR__ . '/src/Controllers/PostController.php';
 require_once __DIR__ . '/src/Controllers/SessionController.php';
@@ -50,6 +50,20 @@ if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
     $user = ['is_admin' => true, 'authenticated' => true, 'name' => $_SESSION['name']];
 } elseif (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
     $user = ['is_admin' => false, 'authenticated' => true, 'name' => $_SESSION['name']];
+} else {
+    $user = ['is_admin' => false, 'authenticated' => false];
+}
+
+// Assurez-vous que toutes les variables de session sont initialisées
+$is_admin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false;
+$authenticated = isset($_SESSION['authenticated']) ? $_SESSION['authenticated'] : false;
+$name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
+
+// Vérifiez si l'utilisateur est connecté et est un admin
+if ($is_admin === true) {
+    $user = ['is_admin' => true, 'authenticated' => true, 'name' => $name];
+} elseif ($authenticated === true) {
+    $user = ['is_admin' => false, 'authenticated' => true, 'name' => $name];
 } else {
     $user = ['is_admin' => false, 'authenticated' => false];
 }
