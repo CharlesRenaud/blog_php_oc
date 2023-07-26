@@ -25,6 +25,7 @@ use App\Services\UserService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+/*Codacy test */
 session_start();
 
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
