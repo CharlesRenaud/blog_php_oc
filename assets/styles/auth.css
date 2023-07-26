@@ -11,12 +11,17 @@
     flex-direction: row;
     width: 800px;
     margin: auto;
+<<<<<<< HEAD
     padding: 40px;    
 
     margin-top: 0px !important
 }
 
 
+=======
+    padding: 40px
+}
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .form-auth .form-group{
     flex-basis: 33% !important;
 }
@@ -49,6 +54,7 @@
     }
     .submit-auth {
         margin-top: 10px;
+<<<<<<< HEAD
 
     }
     
@@ -64,4 +70,8 @@
         text-align: center;
         width: 100%;
     }
+=======
+    }
+    
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }

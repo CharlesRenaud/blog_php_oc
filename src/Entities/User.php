@@ -1,25 +1,36 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+<<<<<<< HEAD
  *
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
  * @ORM\Table(name="users")
  */
 class User
 {
     /**
      * @ORM\Id
+<<<<<<< HEAD
      *
      * @ORM\GeneratedValue
      *
      * @ORM\Column(type="integer")
      *
+=======
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
      */
@@ -34,7 +45,11 @@ class User
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private string $email;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     /**
      * @ORM\Column(type="boolean")
      */
@@ -55,6 +70,10 @@ class User
      */
     private string $password;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     public function getId(): int
     {
         return $this->id;
@@ -69,7 +88,11 @@ class User
     {
         $this->name = $name;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     public function getEmail(): string
     {
         return $this->email;
@@ -79,7 +102,11 @@ class User
     {
         $this->email = $email;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     public function getIsAdmin(): bool
     {
         return $this->isAdmin;
@@ -119,4 +146,8 @@ class User
     {
         return $this->password;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335

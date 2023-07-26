@@ -21,10 +21,16 @@
   
 
   .titre-postList {
+<<<<<<< HEAD
     max-width: 1600px;
     margin: auto !important;
     margin-bottom: 30px !important;
     width: 100%;
+=======
+    width: 1600px;
+    margin: auto !important;
+    margin-bottom: 30px !important;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   }
   
   .arrow {
@@ -44,7 +50,10 @@
   .arrow-left {
     margin-right: 10px;
     background-image: url(../images/carousel-arrow-left.png);
+<<<<<<< HEAD
     visibility: hidden;
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   }
   
   .arrow-right {
@@ -67,8 +76,11 @@
     display: flex;
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   .cover-img {
     width: 100%;
     height: 400px;
@@ -98,7 +110,11 @@
     margin-bottom: 20px;
 }
 .cover-img:hover .article-content-box {
+<<<<<<< HEAD
     width: 100% !important;
+=======
+    width: 100%;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   }
 
 .link-post {
@@ -116,10 +132,15 @@
   
 .visit-site {
     display: block;
+<<<<<<< HEAD
     width : 40px !important;
     height: 40px !important;
     min-width: 40px;
     min-height: 40px;
+=======
+    width : 40px;
+    height: 40px;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     background-color: var(--purple);
     transition: 0.5s;
     border-radius: 3rem;
@@ -156,6 +177,7 @@
     display: flex;
   }
   @media all and (max-width: 768px) {
+<<<<<<< HEAD
     .visit-site {
       height: 30px !important;
       width: 30px !important;
@@ -203,6 +225,11 @@
       font-size: 100% !important
     }
 
+=======
+    .article {
+      flex: 0 0 100% !important;
+    }
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 }
 }

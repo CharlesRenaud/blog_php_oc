@@ -2,7 +2,11 @@
 {% block content %}
     <h1 class="titre-1 titre-auth">Connexion</h1>
     {% if error %}
+<<<<<<< HEAD
         <div class="alert alert-danger login">{{ error }}</div>
+=======
+        <div class="alert alert-danger">{{ error }}</div>
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     {% endif %}
     <form class="form-auth" action="{{ path('session_login') }}" method="post">
         <div class="form-group">

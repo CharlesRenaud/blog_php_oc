@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "dd43a53affeca0d70ee33f98dda7e064",
+=======
+    "content-hash": "294c0ec8a81a60b414ce843e083c5b91",
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -1908,6 +1912,7 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "respect/stringifier",
             "version": "0.2.0",
             "source": {
@@ -2029,6 +2034,8 @@
             "time": "2023-02-15T01:05:24+00:00"
         },
         {
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
             "name": "sebastian/diff",
             "version": "4.0.4",
             "source": {
@@ -4376,6 +4383,7 @@
             "time": "2023-02-24T10:42:00+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/translation",
             "version": "v6.3.0",
             "source": {
@@ -4470,6 +4478,8 @@
             "time": "2023-05-19T12:46:45+00:00"
         },
         {
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
             "name": "symfony/translation-contracts",
             "version": "v3.2.1",
             "source": {

@@ -10,7 +10,11 @@
 	<div class="single-post-wrapper">
 		<div class="single-post-banner">
 			{% if post.coverImage %}
+<<<<<<< HEAD
 				<img src="http://localhost/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
+=======
+				<img src="http://localhost/blog_php_oc/uploads/{{ post.coverImage }}" alt="{{ post.title }}">
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 				<div class="cover-opacity"></div>
 			{% endif %}
 		</div>
@@ -21,7 +25,11 @@
 					{{ post.title }}
 				</h1>
 			</div>
+<<<<<<< HEAD
 			<p id="post-text">{{ post.content }}</p>
+=======
+			<p>{{ post.content }}</p>
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 			<p>Publié le
 				{{ post.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</p>
 			{% if isAdmin %}
@@ -44,8 +52,12 @@
 						<p>
 							Par
 							<span>{{ comment.author.name }}</span>
+<<<<<<< HEAD
 							le
 							{{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+=======
+							le {{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 						</p>
 						{% if isAdmin %}
 							<form class="delete-comment-form" action="{{ path('delete_comment', {'id': comment.id}) }}" method="post">
@@ -63,12 +75,16 @@
 					{% if not comment.getIsValidated and comment.author.id == userId %}
 						<div class="opacity-comment">
 							<p>{{ comment.getContent }}</p>
+<<<<<<< HEAD
 							<p>
 								Par
 								<span>{{ comment.author.name }}</span>
 								le
 								{{ comment.createdAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}
 							</p>
+=======
+							<p>En attente de validation</p>
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 						</div>
 					{% endif %}
 				{% endfor %}
@@ -98,9 +114,15 @@
 					{% if app.session.has('success') %}
 						<div class="alert alert-success">{{ app.session.get('success') }}</div>
 					{% endif %}
+<<<<<<< HEAD
 					<form id="comment-form" action="{{ path('add_comment', {'id': post.id}) }}" method="post">
 						<h2>Ajoute un commentaire</h2>
 						<div class="add-comment-box">
+=======
+					<form action="{{ path('add_comment', {'id': post.id}) }}" method="post">
+						<h2>Ajoute un commentaire</h2>
+						<div>
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 							<textarea name="content" cols="30" rows="10"></textarea>
 							<br>
 							<input type="submit" value="Publier mon commentaire">
@@ -108,6 +130,7 @@
 					</form>
 				</div>
 			{% endif %}
+<<<<<<< HEAD
 
 		</div>
 		{% if not isAuthenticated %}
@@ -115,5 +138,8 @@
 				<a href="{{path ("session_login_form")}}">Connecte toi pour commenter !</a>
 			</div>
 		{% endif %}
+=======
+		</div>
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 	</div>
 {% endblock %}

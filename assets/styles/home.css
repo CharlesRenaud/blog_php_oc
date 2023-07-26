@@ -125,6 +125,7 @@ form label {
   z-index: 0;
 }
 
+<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .photo-charles {
     height: 100px;
@@ -184,6 +185,8 @@ form label {
 
 }
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .photo-charles:hover {
   border: 5px solid var(--green);
   background-size: 200%;
@@ -242,6 +245,7 @@ label.titre-2 {
   margin-bottom:10px;
 }
 
+<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .modal-calcul .titre-2 {
     font-size: 16px !important;
@@ -252,6 +256,8 @@ label.titre-2 {
   }
 }
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 .modal-calcul input,
 .modal-calcul button
@@ -262,6 +268,7 @@ label.titre-2 {
   margin-bottom:0px;
 }
 
+<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .modal-calcul button {
     font-size: 12px !important;
@@ -269,6 +276,8 @@ label.titre-2 {
   }
 }
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .calcul {
   font-weight: bold;
   margin-bottom: 20px;
@@ -398,7 +407,10 @@ label.titre-2 {
   right: 0%;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
 .console div {
   font-style: italic !important;
@@ -412,7 +424,10 @@ label.titre-2 {
 
 #cursor {
   animation: blink 0.7s infinite;
+<<<<<<< HEAD
   opacity: 0 !important
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 }
 
@@ -496,7 +511,10 @@ label.titre-2 {
     padding : 10px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .logo-skills {
   position: relative;
   flex-basis: 21%;
@@ -510,6 +528,7 @@ label.titre-2 {
   opacity: 0.6;
 }
 
+<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .skills-box {
     height: 40px;
@@ -552,6 +571,8 @@ label.titre-2 {
 }
 
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .php {
   background-image: url("../images/php.png");
 }
@@ -589,5 +610,8 @@ label.titre-2 {
   50% {
     color: var(--purple);
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }

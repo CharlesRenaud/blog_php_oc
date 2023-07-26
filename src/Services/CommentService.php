@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 declare(strict_types=1);
 
 namespace App\Services;
@@ -8,6 +9,14 @@ use App\Entities\Comment;
 use App\Entities\Post;
 use App\Entities\User;
 use Doctrine\ORM\EntityManager;
+=======
+namespace App\Services;
+
+use Doctrine\ORM\EntityManager;
+use App\Entities\Comment;
+use App\Entities\Post;
+use App\Entities\User;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 class CommentService
 {
@@ -20,7 +29,10 @@ class CommentService
 
     /**
      * @param int $postId
+<<<<<<< HEAD
      *
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
      * @return Comment[]
      */
     public function getCommentsByPostId(int $postId): array
@@ -30,7 +42,10 @@ class CommentService
 
     /**
      * @param int $postId
+<<<<<<< HEAD
      *
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
      * @return Comment[]
      */
     public function getValidatedCommentsByPostId(int $postId): array
@@ -42,7 +57,10 @@ class CommentService
      * @param string $content
      * @param int $postId
      * @param int $authorId
+<<<<<<< HEAD
      *
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
      * @return Comment
      */
     public function createComment(string $content, int $postId, int $authorId): Comment
@@ -74,7 +92,10 @@ class CommentService
     public function validateComment(int $commentId): void
     {
         $comment = $this->entityManager->getRepository(Comment::class)->find($commentId);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
         if ($comment) {
             $comment->setIsValidated(true);
             $this->entityManager->persist($comment);
@@ -88,7 +109,10 @@ class CommentService
     public function deleteComment(int $commentId): void
     {
         $comment = $this->entityManager->getRepository(Comment::class)->find($commentId);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
         if ($comment) {
             $this->entityManager->remove($comment);
             $this->entityManager->flush();

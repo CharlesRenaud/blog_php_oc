@@ -1,0 +1,15 @@
+$env:DB_USERNAME = "log"
+$env:DB_PASSWORD = "pass"
+
+vendor\bin\doctrine orm:schema-tool:create
+
+
+
+
+ArrayCollection est une classe fournie par la bibliothèque Doctrine Common et fait partie du composant Collections. Elle implémente l'interface Collection et offre des fonctionnalités pour gérer une collection d'objets de manière similaire à un tableau. Vous pouvez ajouter, supprimer, rechercher des éléments, itérer sur la collection, etc. C'est une classe très pratique et largement utilisée dans le contexte de Doctrine.
+
+D'autre part, PersistentCollection est une classe spécifique à Doctrine ORM. Elle étend ArrayCollection et ajoute des fonctionnalités spécifiques à la gestion de collections d'entités persistantes. Lorsque vous récupérez une collection d'entités à partir de la base de données via Doctrine ORM, il s'agit d'une PersistentCollection. Elle permet à Doctrine de gérer efficacement les opérations d'accès aux entités liées dans les relations, comme les relations un-à-plusieurs ou plusieurs-à-plusieurs.
+
+La principale différence entre PersistentCollection et ArrayCollection réside dans la façon dont elles gèrent les opérations d'accès aux entités. PersistentCollection utilise des mécanismes de chargement différé (lazy loading) pour retarder le chargement des entités tant que vous n'en avez pas besoin. Cela permet à Doctrine de charger les entités liées de manière plus efficace et de réduire les requêtes superflues à la base de données.
+
+En résumé, ArrayCollection est une classe générique pour gérer des collections d'objets, tandis que PersistentCollection est une classe spécifique à Doctrine ORM pour gérer les collections d'entités persistantes en utilisant le chargement différé pour optimiser les performances.

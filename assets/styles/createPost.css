@@ -1,6 +1,7 @@
 .post-form {
     display: flex;
     flex-wrap: wrap;
+<<<<<<< HEAD
     max-width: 900px;
     margin: auto;
     box-sizing: border-box;
@@ -11,6 +12,16 @@
 
 .post-form .form-group {
     flex-basis: 48.7% !important;
+=======
+    max-width: 1200px;
+    margin: auto;
+    box-sizing: border-box;
+    padding : 40px;
+}
+
+.post-form .form-group {
+    flex-basis: 49.1% !important;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -37,6 +48,7 @@
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .post-form .form-group.form-content .form-control,
 .post-form .form-group textarea
  {
@@ -44,6 +56,10 @@
     height: 300px !important;
     min-height: 0px !important;
     overflow: visible !important;
+=======
+.post-form .form-group.form-content .form-control {
+    width: 100%;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
 
 .post-form button {
@@ -51,11 +67,19 @@
 }
 
 .titre-createPost {
+<<<<<<< HEAD
     max-width: 900px;
     width: 100%;
     margin: auto !important;
     margin-top:40px !important;
     margin-bottom: 0px !important;
+=======
+    max-width: 1200px;
+    width: 100%;
+    margin: auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
 
 
@@ -73,10 +97,13 @@
 }
 .form-edit .form-group:nth-child(3) textarea{
     height: 250px !important;
+<<<<<<< HEAD
 }
 
 @media all and (max-width: 768px) {
     .titre-createPost {
         margin-left: calc(40px) !important;
     }
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }

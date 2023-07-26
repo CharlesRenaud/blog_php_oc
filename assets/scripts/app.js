@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function () {
   /* Script du burger menu animé */
   // Récupération de l'élément avec l'id "content"
@@ -13,11 +14,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const menu = document.querySelector('.menu');
 
   // Ajout d'un écouteur d'événement sur le burger menu pour activer/désactiver la classe 'active'
+=======
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  /* Script du burger menu animé */
+  const content = document.getElementById("content");
+  console.log(content)
+  if (content.scrollHeight <= content.clientHeight) {
+    content.style.overflowY = "hidden";
+  }
+  const burgerMenu = document.querySelector('.burger-menu');
+  const menu = document.querySelector('.menu');
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   burgerMenu.addEventListener('click', () => {
     burgerMenu.classList.toggle('active');
     menu.classList.toggle('active');
   });
 
+<<<<<<< HEAD
   // Vérification de l'URL pour la page "/post/id"
   const postPath = window.location.pathname.split("/post/")[1];
 
@@ -38,6 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalChecker = document.querySelector(".modal-calcul")
   if (btnChecker) {
     // Ajout d'un écouteur d'événement sur le bouton pour activer/désactiver la classe 'active' du modal
+=======
+  menu.addEventListener('click', () => {
+    burgerMenu.classList.remove('active');
+    menu.classList.remove('active');
+  });
+
+  /* Script pour afficher le modal de verification avant envoie de formulaire */
+  const btnChecker = document.querySelector('#form-checker');
+  const modalChecker = document.querySelector(".modal-calcul")
+  if (btnChecker) {
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     btnChecker.addEventListener('click', () => {
       modalChecker.classList.toggle('active');
       btnChecker.classList.toggle('active');
@@ -47,9 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+<<<<<<< HEAD
 
   /* Script Caché Home Console */
   // Tableaux de commandes et de réponses
+=======
+  /* Script Caché Home Console */
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   const commands = [
     "Salut ! C'est Charles, je codais le formulaire de contact, et j'ai eu envie de savoir comment envoyer un email via smtp depuis un bash linux. J'ai trouvé la réponse, je te fais un condensé ;) ",
     "Tuto : Envoie d'un email via un script shell, sur linux en utilisant le serveur smtp de Gmail",
@@ -112,11 +143,16 @@ document.addEventListener("DOMContentLoaded", function () {
     "Tu es maintenant un vrai script kiddie"
   ]
 
+<<<<<<< HEAD
   // Récupération des éléments de la console
+=======
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   const command = document.getElementById("command");
   const cursor = document.getElementById("cursor");
   let isRunning = false;
 
+<<<<<<< HEAD
   // Fonction pour afficher les commandes et réponses une par une
   function type(commands, responses, index) {
 
@@ -124,13 +160,29 @@ document.addEventListener("DOMContentLoaded", function () {
     let i = 0;
 
     // Fonction récursive pour afficher les caractères un par un
+=======
+  function type(commands, responses, index) {
+
+    // Vérifier si la fonction est déjà en cours d'exécution
+    if (isRunning) {
+      return;
+    }
+    isRunning = true;
+
+    let i = 0;
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     function print() {
       if (i < commands[index].length) {
         var console = document.querySelector(".console");
         console.scrollTop = console.scrollHeight;
         command.innerHTML += commands[index].charAt(i);
         i++;
+<<<<<<< HEAD
         setTimeout(print, 15);
+=======
+        setTimeout(print, 35);
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
       } else {
         cursor.style.display = "none";
         command.innerHTML += "<br/><div>" + responses[index] + "</div><br/>";
@@ -138,20 +190,30 @@ document.addEventListener("DOMContentLoaded", function () {
         console.scrollTop = console.scrollHeight;
 
         setTimeout(function () {
+<<<<<<< HEAD
           cursor.style.display = "inline-flex";
+=======
+          cursor.style.display = "inline";
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
           type(commands, responses, index + 1);
         }, 500);
 
       }
     }
 
+<<<<<<< HEAD
     // Lancement de l'affichage
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     print();
     isRunning = false;
 
   }
 
+<<<<<<< HEAD
   // Fonction pour déplacer la souris d'un pixel vers la droite
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   function moveCursor() {
     // Obtenir la position actuelle de la souris
     let mouseX = event.clientX;
@@ -172,20 +234,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /* Script pour lancer le script caché précédent */
+<<<<<<< HEAD
   // Récupération des éléments nécessaires pour le script caché
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   let imageContactBg = document.querySelector('.image-contact-bg');
   let secretButton = document.querySelector('.secret');
 
   if (imageContactBg) {
+<<<<<<< HEAD
     // Ajout d'un écouteur d'événement lorsqu'on survole l'image de fond
     imageContactBg.addEventListener('mouseenter', function () {
       secretButton.style.transitionDelay = "2s";
       secretButton.classList.add('active');
       // Attente de 2 secondes avant d'afficher le bouton secret
+=======
+    imageContactBg.addEventListener('mouseenter', function () {
+      secretButton.style.transitionDelay = "2s";
+      secretButton.classList.add('active');
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
       setTimeout(function () {
         secretButton.classList.add('hover');
         // script pour décaler la souris de l'utilisateur afin de refresh le cursor pointer
         () => moveCursor();
+<<<<<<< HEAD
         // Ajout d'un écouteur d'événement lorsqu'on clique sur le bouton secret
         secretButton.addEventListener('click', function () {
           if (!isRunning) {
@@ -202,6 +274,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 2000);
     });
     // Ajout d'un écouteur d'événement lorsqu'on quitte la zone de l'image de fond
+=======
+        secretButton.addEventListener('click', function () {
+          setTimeout(function () {
+            var console = document.querySelector(".console");
+            console.classList.add('active');
+            imageContactBg.style.display = "none";
+            type(commands, responses, 0);
+          }, 500);
+        });
+      }, 2000);
+    });
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     imageContactBg.addEventListener('mouseleave', function () {
       secretButton.style.transitionDelay = "0s";
       secretButton.classList.remove('active');
@@ -210,7 +294,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   if (secretButton) {
+<<<<<<< HEAD
     // Ajout d'un écouteur d'événement lorsque l'utilisateur quitte le bouton secret
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     secretButton.addEventListener('mouseleave', function () {
       secretButton.style.transitionDelay = "0s";
       secretButton.classList.remove('active');
@@ -222,7 +309,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const carrouselContainer = document.querySelector('.carrousel-container');
 
   if (carrouselContainer) {
+<<<<<<< HEAD
     // Initialisation de la position du carrousel
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     let position = 0;
     const articles = document.getElementsByClassName('article');
     const carrouselInner = document.getElementsByClassName('carrousel-inner')[0];
@@ -230,22 +320,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const arrowLeft = document.getElementById('arrow-left');
     const arrowRight = document.getElementById('arrow-right');
 
+<<<<<<< HEAD
     // Fonction pour mettre à jour la visibilité des flèches du carrousel
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     function updateArrowsVisibility() {
       const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
 
       arrowLeft.style.visibility = position === 0 ? 'hidden' : 'visible';
+<<<<<<< HEAD
       arrowRight.style.visibility = position > maxPosition - 100 ? 'hidden' : 'visible';
     }
 
     // Fonction pour réinitialiser la position du carrousel
+=======
+      arrowRight.style.visibility = position >= maxPosition - 20 ? 'hidden' : 'visible';
+    }
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     function resetPosition() {
       position = 0;
       carrouselInner.style.transform = `translateX(0)`;
       updateArrowsVisibility();
     }
 
+<<<<<<< HEAD
     // Fonction pour calculer la largeur totale du carrousel
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     function getTotalWidth() {
       let totalWidth = 0;
       for (let i = 0; i < articles.length; i++) {
@@ -254,7 +356,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return totalWidth;
     }
 
+<<<<<<< HEAD
     // Fonction pour déplacer le carrousel vers la gauche ou la droite
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     function move(direction) {
       const articleWidth = articles[0].offsetWidth + 20;
       const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
@@ -267,7 +372,10 @@ document.addEventListener("DOMContentLoaded", function () {
       updateArrowsVisibility();
     }
 
+<<<<<<< HEAD
     // Ajout des écouteurs d'événements sur les flèches du carrousel
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     arrowLeft.addEventListener('click', function () {
       move(-1);
     });
@@ -276,18 +384,27 @@ document.addEventListener("DOMContentLoaded", function () {
       move(1);
     });
 
+<<<<<<< HEAD
     // Ajout d'un écouteur d'événement de redimensionnement de la fenêtre pour réinitialiser la position du carrousel
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     window.addEventListener('resize', function () {
       resetPosition();
     });
 
+<<<<<<< HEAD
     // Mise à jour de la visibilité des flèches
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     updateArrowsVisibility();
 
   }
 
   // Trigger animation hover post list
+<<<<<<< HEAD
   // Ajout des écouteurs d'événements pour animer les articles de la liste de publications au survol
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   var elements = document.querySelectorAll(".article");
   var articleContent = document.querySelectorAll(".article-content-box");
 
@@ -322,6 +439,7 @@ document.addEventListener("DOMContentLoaded", function () {
       newLink.classList.add("arrow-left");
       newLink.classList.add("arrow");
       newLink.classList.add("arrow-back");
+<<<<<<< HEAD
       const url = window.location.href;
       const baseURL = window.location.origin;
       var redirection;
@@ -353,6 +471,10 @@ document.addEventListener("DOMContentLoaded", function () {
       newLink.onclick = function () {
         window.location.href = redirection; // Utilise history.go(-1) au lieu de history.back()
 
+=======
+      newLink.onclick = function () {
+        history.back();
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
         return false;
       }
 
@@ -361,12 +483,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+<<<<<<< HEAD
   // Gestion du script pour afficher/cacher les commentaires d'un article
+=======
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
   const singlePostCommentWrapper = document.querySelector('.single-post-comment-wrapper');
 
   if (singlePostCommentWrapper) {
     let isExpanded = false;
     const commentHeader = singlePostCommentWrapper.querySelector('h2');
+<<<<<<< HEAD
 
     commentHeader.addEventListener('click', () => {
       if (window.innerWidth > 768) {
@@ -399,6 +525,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   }
+=======
+  
+    commentHeader.addEventListener('click', () => {
+      if (isExpanded) {
+        singlePostCommentWrapper.style.height = '70px';
+        isExpanded = false;
+      } else {
+        singlePostCommentWrapper.style.height = 'auto';
+        isExpanded = true;
+        const commentAnchor = document.querySelector('#ancre-comment');
+        if (commentAnchor) {
+          commentAnchor.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  }
+  
+
+
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 })
 
 
@@ -410,3 +557,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
