@@ -16,16 +16,11 @@
   --poppins: 'Poppins', sans-serif;
 }
 
-<<<<<<< HEAD
-=======
-html {}
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 body {
   color: var(--black);
   margin: 0;
   font-family: var(--poppins);
-<<<<<<< HEAD
   min-height: 100vh !important;
   display: flex;
   flex-direction: column;
@@ -53,7 +48,7 @@ body {
 
 @media all and (max-width : 768px) {
   #content {
-    padding : 0px;
+    padding: 0px;
     min-height: 85vh;
   }
 
@@ -63,28 +58,6 @@ body {
 html {
   scroll-behavior: smooth;
 }
-=======
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#header {
-  height: 10vh;
-}
-
-#content {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  overflow: hidden;
-}
-
-
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 /* Footer & RS */
 #footer {
@@ -93,10 +66,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
   justify-self: flex-end;
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
 
 .titre-1 {
@@ -105,21 +75,15 @@ html {
 
 @media all and (max-width: 768px) {
   .titre-1 {
-<<<<<<< HEAD
     font-size: 16px !important
   }
+
   .titre-1-sub {
     font-size: 13px !important
   }
 }
 
 
-=======
-    font-size: 16px
-  }
-}
-
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .box-rs {
   position: relative;
 }
@@ -247,6 +211,7 @@ html {
   transition: all 0.5s ease;
   font-weight: bold;
 }
+
 .menu li a:hover {
   opacity: 0.55;
   font-size: 25px;
@@ -282,11 +247,7 @@ html {
 .titre-1-sub {
   font-weight: 600;
   text-transform: uppercase;
-<<<<<<< HEAD
   font-size: 22px;
-=======
-  font-size: 25px;
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
 
 .titre-2 {
@@ -313,7 +274,7 @@ html {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: auto;
-  width:  100%;
+  width: 100%;
   margin-top: 0px !important;
   margin-bottom: 0px;
   justify-content: space-between;
@@ -348,7 +309,6 @@ form {
   margin-top: 40px;
 }
 
-<<<<<<< HEAD
 
 .alert-danger {
   max-width: 900px;
@@ -357,6 +317,7 @@ form {
   margin-bottom: 0px !important;
   color: rgba(238, 49, 49, 0.959)
 }
+
 .alert-danger.login {
   max-width: 880px;
   width: 100%;
@@ -366,27 +327,27 @@ form {
   color: rgba(238, 49, 49, 0.959)
 }
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .form-box form {
   margin-top: 20px;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 1200px) {
   .contact-form {
     padding-left: 20px;
   }
+
   .alert-danger {
     text-align: left;
   }
 
 }
+
 @media all and (max-width: 1000px) {
-  .titre-auth{
+  .titre-auth {
     padding-right: 0px;
     text-align: center;
   }
+
   .alert-danger {
     text-align: center;
   }
@@ -397,11 +358,13 @@ form {
   .alert-danger {
     text-align: center;
   }
+
   .contact-form {
     flex-wrap: wrap !important;
     padding-left: 0px;
 
   }
+
   .form-box {
     margin-top: 70px !important;
     padding-left: 0px;
@@ -412,26 +375,34 @@ form {
     flex-basis: 100%;
 
   }
+
   .form-box form {
     margin-top: 20px;
     padding-top: 5px;
     flex-wrap: wrap !important;
 
   }
-  .col-gauche, .col-droite {
+
+  .col-gauche,
+  .col-droite {
     flex-basis: 100% !important;
   }
+
   .col-droite {
-    padding-left:  20px;;
+    padding-left: 20px;
+    ;
   }
+
   .plane-img {
     display: none;
   }
+
   .contact-form h2 {
     margin-top: 10px;
     font-size: 14px !important;
-    padding-left:10%
+    padding-left: 10%
   }
+
   .calcul {
     font-size: 14px !important;
   }
@@ -439,8 +410,6 @@ form {
 
 
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 form div {
   display: flex;
   flex-direction: column;
@@ -448,7 +417,7 @@ form div {
 
 .link {
   text-decoration: none;
-  color : var(--purple);
+  color: var(--purple);
   transition: 0.5s;
 }
 
@@ -456,11 +425,11 @@ form div {
   opacity: 0.75;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 768px) {
   body * {
     font-size: 90% !important;
   }
+
   #footer * {
     font-size: 50% !important;
   }
@@ -469,9 +438,11 @@ form div {
     min-height: 0px !important;
 
   }
+
   .box-rs .titre-1 {
     text-align: center;
   }
+
   .rs {
     position: relative;
     bottom: 0px;
@@ -481,13 +452,13 @@ form div {
     margin-top: 10px !important;
     max-width: 150px;
   }
+
   .hero {
-    margin-bottom : -20px;
+    margin-bottom: -20px;
   }
+
   .menu * {
     font-size: 100% !important
   }
 
 }
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335

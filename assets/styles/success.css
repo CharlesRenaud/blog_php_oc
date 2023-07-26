@@ -12,8 +12,7 @@
 }
 
 .error-message a,
-.error-message a:visited
-{
+.error-message a:visited {
     color: var(--purple);
     transition: 0.25s;
 }
@@ -30,6 +29,7 @@
     .error-img {
         max-width: 60px;
     }
+
     .flash-message {
         text-align: center;
     }

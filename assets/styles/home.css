@@ -1,11 +1,11 @@
-
 .rs {
   width: 100%;
   text-align: center;
   margin-top: 40px;
 }
 
-form input, form textarea {
+form input,
+form textarea {
   all: unset;
   border: 2px solid var(--purple);
   max-width: 80%;
@@ -17,6 +17,7 @@ form input, form textarea {
   font-weight: bold;
   transition: 0.5s;
 }
+
 form textarea {
   height: 200px;
 }
@@ -36,8 +37,9 @@ form input:hover {
   justify-content: center;
   align-items: center;
   width: 80%;
-  padding : 10px;
+  padding: 10px;
 }
+
 form button {
   font-family: var(--poppins);
   border: 2px solid var(--purple);
@@ -53,6 +55,7 @@ form button {
   text-transform: uppercase !important;
   letter-spacing: 0.025em;
 }
+
 form button:hover {
   background-color: white;
   color: var(--purple);
@@ -62,6 +65,7 @@ form button:hover {
 form label {
   font-weight: bold;
 }
+
 .col-gauche {
   flex-basis: 40%;
   margin-left: 20px;
@@ -70,15 +74,17 @@ form label {
   align-self: flex-start;
 }
 
-.col-gauche > div label{
+.col-gauche>div label {
   align-items: flex-start;
   display: flex;
   width: 90%;
 }
+
 .col-droite {
   flex-basis: 60%;
 }
-.col-droite > div {
+
+.col-droite>div {
   justify-content: center;
 }
 
@@ -88,16 +94,17 @@ form label {
 .hero {
   max-width: 1200px;
   margin: auto;
-  margin-top:0px;
+  margin-top: 0px;
   margin-bottom: 40px;
   width: 100%;
   background-color: var(--grey-2);
-  padding : 20px 20px;
+  padding: 20px 20px;
   box-sizing: border-box;
   margin-bottom: 0px;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
   height: auto;
 }
+
 .hero-content {
   display: flex;
   justify-content: flex-start;
@@ -125,15 +132,16 @@ form label {
   z-index: 0;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .photo-charles {
     height: 100px;
     width: 100px;
   }
-  .photo-charles .text{
+
+  .photo-charles .text {
     font-size: 12px;
   }
+
   .col-gauche {
     margin-left: 0px;
     display: flex;
@@ -141,10 +149,12 @@ form label {
     align-items: center;
     padding-top: 10px;
   }
+
   .box-col-gauche {
     display: flex;
     align-items: center;
   }
+
   .col-gauche div {
     min-width: 80%;
   }
@@ -154,39 +164,42 @@ form label {
     width: 100%;
     box-sizing: border-box;
   }
-  .col-gauche > div label {
+
+  .col-gauche>div label {
     width: 100%;
   }
-  .col-droite  {
+
+  .col-droite {
     padding-left: 0px !important;
     justify-content: center;
     align-items: center;
   }
-  .col-droite > div {
+
+  .col-droite>div {
     padding-left: 0px !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center;
     width: 90%;
   }
-  .col-droite > div label
-   {
+
+  .col-droite>div label {
     max-width: 90% !important;
     width: 90%;
   }
-  .col-droite > div textarea {
+
+  .col-droite>div textarea {
     max-width: 90% !important;
     width: 90%;
     box-sizing: border-box;
   }
-  .form-box *{
+
+  .form-box * {
     font-size: 95% !important;
   }
 
 }
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .photo-charles:hover {
   border: 5px solid var(--green);
   background-size: 200%;
@@ -219,7 +232,7 @@ form label {
 
 .modal-calcul {
   position: fixed;
-  background-color:  white;
+  background-color: white;
   top: -100%;
   left: 0%;
   width: 100%;
@@ -228,11 +241,12 @@ form label {
   transition: 0.5s;
   overflow: hidden;
 }
+
 .modal-calcul.active {
   top: 0%;
   left: 0%;
   position: fixed;
-  background-color:  white;
+  background-color: white;
   height: 100vh;
   width: 100vw;
   z-index: 1002;
@@ -240,35 +254,32 @@ form label {
   justify-content: center;
   align-items: center;
 }
+
 label.titre-2 {
   width: auto;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .modal-calcul .titre-2 {
     font-size: 16px !important;
     text-align: center;
   }
+
   .titre-2 {
     padding-left: 20px;
   }
 }
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 .modal-calcul input,
-.modal-calcul button
- {
+.modal-calcul button {
   max-width: 225px;
   margin: auto;
-  margin-top:0px;
-  margin-bottom:0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .modal-calcul button {
     font-size: 12px !important;
@@ -276,15 +287,14 @@ label.titre-2 {
   }
 }
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .calcul {
   font-weight: bold;
   margin-bottom: 20px;
 }
+
 #maths {
   display: inline-block;
-  margin : 0 !important;
+  margin: 0 !important;
   width: 50px
 }
 
@@ -311,18 +321,16 @@ label.titre-2 {
   cursor: pointer;
 }
 
-#form-checker.active {
 
-}
 #form-checker.active:before {
-  content : "Fermer";
+  content: "Fermer";
   position: fixed;
   z-index: 99999;
   background-color: var(--purple);
   color: white;
   height: 40px;
   width: 150px;
-  top:20px;
+  top: 20px;
   padding: 5px 10px;
   box-sizing: border-box;
   right: 20px;
@@ -333,6 +341,7 @@ label.titre-2 {
   transition: 0.5s !important;
   border: 2px solid var(--purple);
 }
+
 #form-checker.active:hover:before {
   background-color: white !important;
   color: var(--purple)
@@ -353,7 +362,7 @@ label.titre-2 {
   position: absolute;
   bottom: 0px;
   left: 0px;
-  margin : 0;
+  margin: 0;
   font-weight: bold;
   text-transform: uppercase;
   animation: rotate-text 1s linear infinite;
@@ -367,15 +376,19 @@ label.titre-2 {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(25deg);
   }
+
   50% {
     transform: rotate(0deg);
   }
+
   75% {
     transform: rotate(-25deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -402,16 +415,14 @@ label.titre-2 {
   align-self: stretch;
   max-height: 350px;
 }
+
 .console.active {
   position: relative;
   right: 0%;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 }
+
 .console div {
   font-style: italic !important;
   font-size: 12px;
@@ -424,11 +435,7 @@ label.titre-2 {
 
 #cursor {
   animation: blink 0.7s infinite;
-<<<<<<< HEAD
   opacity: 0 !important
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
-
 }
 
 .image-contact-bg {
@@ -454,21 +461,22 @@ label.titre-2 {
   position: absolute;
   background-color: rgb(255, 255, 255, 0);
   transition: 1s;
-  content : "";
+  content: "";
 }
 
 .image-contact-bg:hover:before {
   content: '';
   background-color: rgb(255, 255, 255, 0.35);
 }
+
 .secret {
   all: unset;
   position: absolute;
-  color : transparent;
+  color: transparent;
   background-color: transparent;
   width: 100%;
   height: 80%;
-  bottom :0;
+  bottom: 0;
   transition: all 0.5s 0.5s;
   display: flex;
   justify-content: center;
@@ -478,57 +486,54 @@ label.titre-2 {
   font-size: 22px;
   line-height: 1em;
 }
+
 .secret.active {
-  color : var(--purple) !important;
+  color: var(--purple) !important;
   background-color: var(--grey-2);
   box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 8px;
 
 }
 
 .secret.active.hover {
-    transition-delay: 2s;
-    cursor: pointer;
+  transition-delay: 2s;
+  cursor: pointer;
 }
 
-.hero-content{
+.hero-content {
   position: relative;
   box-sizing: border-box;
 }
 
 .skills-box {
-    height: 130%;
-    flex-basis: 25%;
-    display: flex;
-    flex-wrap: wrap;
-    padding : 0px;
-    width: 200px;
-    justify-content: center;
-    position: absolute;
-    right: -1.8%;
-    box-sizing: border-box;
-    gap: 20px;
-    background-color: rgba(0, 0, 0, 0.035);
-    padding : 10px;
+  height: 130%;
+  flex-basis: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px;
+  width: 200px;
+  justify-content: center;
+  position: absolute;
+  right: -1.8%;
+  box-sizing: border-box;
+  gap: 20px;
+  background-color: rgba(0, 0, 0, 0.035);
+  padding: 10px;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .logo-skills {
   position: relative;
   flex-basis: 21%;
-  align-self:stretch;
+  align-self: stretch;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   transition: 0.5s;
 }
+
 .logo-skills:hover {
   opacity: 0.6;
 }
 
-<<<<<<< HEAD
 @media all and (max-width: 768px) {
   .skills-box {
     height: 40px;
@@ -552,48 +557,57 @@ label.titre-2 {
     padding-top: 5px;
 
   }
+
   .logo-skills {
     flex-basis: 15%;
   }
+
   .hero-content {
     display: flex;
     height: auto;
     flex-direction: column;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
   }
+
   .photo-charles {
     margin-bottom: -20px;
   }
+
   #form-checker.active:before {
     width: 100px;
   }
 }
 
 
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 .php {
   background-image: url("../images/php.png");
 }
+
 .js {
   background-image: url("../images/js.png");
 }
+
 .linux {
   background-image: url("../images/linux.png");
 }
+
 .wordpress {
   background-image: url("../images/wordpress.png");
 }
+
 .symfony {
   background-image: url("../images/symfony.png");
 }
+
 .react {
   background-image: url("../images/react.png");
 }
+
 .nodejs {
   background-image: url("../images/nodejs.png");
 }
+
 .mysql {
 
   background-image: url("../images/mysql.png");
@@ -604,14 +618,14 @@ label.titre-2 {
 }
 
 @keyframes blink {
-  from, to {
+
+  from,
+  to {
     color: transparent;
   }
+
   50% {
     color: var(--purple);
   }
-<<<<<<< HEAD
-  
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
+
 }
