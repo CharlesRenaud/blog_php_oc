@@ -28,11 +28,7 @@ use Twig\Loader\FilesystemLoader;
 
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
     ->setUsername('smtpocblogtest@gmail.com')
-<<<<<<< HEAD
     ->setPassword('chizwfuhtvjfwktj');
-=======
-    ->setPassword('hygxjupuqdkadjhv');
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 $transport->setStreamOptions([
     'ssl' => [
         'verify_peer' => false,
@@ -100,7 +96,6 @@ $commentService = new CommentService($entityManager);
 $postService = new PostService($entityManager, $commentService, $userService);
 
 // Les routes
-<<<<<<< HEAD
 $router->map('GET', '/', 'HomeController#index', 'home');
 $router->map('POST', '/', 'HomeController#index', 'home_register');
 
@@ -128,35 +123,6 @@ $router->map('POST', '/comment/[i:id]/delete', 'PostController#deleteComment', '
 
 $router->map('GET', '/assets/styles/base.css', 'AssetsController#serveCss', 'serve_css');
 $router->map('GET', '/assets/scripts/js.js', 'AssetsController#serveJs', 'serve_js');
-=======
-$router->map('GET', '/blog_php_oc/', 'HomeController#index', 'home');
-$router->map('POST', '/blog_php_oc/', 'HomeController#index', 'home_register');
-
-$router->map('GET', '/blog_php_oc/posts', 'PostController#AllPosts', 'posts');
-$router->map('GET', '/blog_php_oc/post/[i:id]', 'PostController#Post', 'post_single');
-$router->map('POST', '/blog_php_oc/post/add-comment/[i:id]', 'PostController#addComment', 'add_comment');
-
-$router->map('GET', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post_form');
-$router->map('POST', '/blog_php_oc/post/add-post', 'PostController#addPost', 'add_post');
-$router->map('POST', '/blog_php_oc/post/delete-post/[i:id]', 'PostController#deletePost', 'delete_post');
-
-$router->map('GET', '/blog_php_oc/post/edit-post/[i:id]', 'PostController#editPost', 'edit_post_form');
-$router->map('POST', '/blog_php_oc/post/edit-post/[i:id]', 'PostController#editPost', 'edit_post');
-
-$router->map('GET', '/blog_php_oc/login', 'SessionController#login', 'session_login_form');
-$router->map('POST', '/blog_php_oc/login', 'SessionController#login', 'session_login');
-
-$router->map('GET', '/blog_php_oc/register', 'SessionController#register', 'session_register_form');
-$router->map('POST', '/blog_php_oc/register', 'SessionController#register', 'session_register');
-
-$router->map('GET', '/blog_php_oc/logout', 'SessionController#logout', 'session_logout');
-
-$router->map('POST', '/blog_php_oc/comment/[i:id]/validate', 'PostController#validateComment', 'validate_comment');
-$router->map('POST', '/blog_php_oc/comment/[i:id]/delete', 'PostController#deleteComment', 'delete_comment');
-
-$router->map('GET', '/blog_php_oc/assets/styles/base.css', 'AssetsController#serveCss', 'serve_css');
-$router->map('GET', '/blog_php_oc/assets/scripts/js.js', 'AssetsController#serveJs', 'serve_js');
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 
 
 // Match the current request
@@ -212,19 +178,11 @@ if ($match) {
                     echo $response->getContent();
                     break;
                 case 'addPost':
-<<<<<<< HEAD
                     $response = $post->addPost($request);
                     echo $response->getContent();
                     break;
                 case 'deletePost':
                     $response = $post->deletePost($match);
-=======
-                    $response = $post->addPost($request, $match);
-                    echo $response->getContent();
-                    break;
-                case 'deletePost':
-                    $response = $post->deletePost($request, $match);
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
                     echo $response->getContent();
                     break;
                 case 'editPost':
@@ -246,20 +204,12 @@ if ($match) {
             }
             break;
         case "SessionController":
-<<<<<<< HEAD
             $session = new SessionController($entityManager, $twig);
-=======
-            $session = new SessionController($entityManager, $twig, $userService);
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
             $request = Request::createFromGlobals();
             switch ($action) {
                 case 'login':
                     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-<<<<<<< HEAD
                         header("Location: ");
-=======
-                        header("Location: /blog_php_oc");
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
                         exit;
                     } else {
                         $response = $session->login($request);
@@ -268,11 +218,7 @@ if ($match) {
                     }
                 case 'register':
                     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-<<<<<<< HEAD
                         header("Location: ");
-=======
-                        header("Location: /blog_php_oc");
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
                         exit;
                     } else {
                         $response = $session->register($request);
@@ -293,10 +239,6 @@ if ($match) {
             break;
     }
 } else {
-<<<<<<< HEAD
     header("Location: /");
-=======
-    header("Location: /blog_php_oc/");
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
     exit;
 }
