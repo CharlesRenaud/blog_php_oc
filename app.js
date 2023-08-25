@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Ajout d'un écouteur d'événement sur le burger menu pour activer/désactiver la classe 'active'
   burgerMenu.addEventListener('click', () => {
-    burgerMenu.classList.toggle('active');
-    menu.classList.toggle('active');
+    burgerMenu.classList.toggle("active");
+    menu.classList.toggle("active");
   });
 
   // Vérification de l'URL pour la page "/post/id"
@@ -39,9 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (btnChecker) {
     // Ajout d'un écouteur d'événement sur le bouton pour activer/désactiver la classe 'active' du modal
     btnChecker.addEventListener('click', () => {
-      modalChecker.classList.toggle('active');
-      btnChecker.classList.toggle('active');
-
+      modalChecker.classList.toggle("active");
+      btnChecker.classList.toggle("active");
     });
   }
 
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "chmod +x send_email.sh",
     "./send_email.sh",
     "Félicitations !"
-  ];
+  ]
 
   const responses = [
     "Mise en place du contexte...",
@@ -161,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mouseX += 1;
 
     // Créer un nouvel événement de souris avec la position modifiée
-    const event = new MouseEvent('mousemove', {
+    const event = new MouseEvent("mousemove", {
       clientX: mouseX,
       clientY: mouseY
     });
@@ -173,27 +172,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Script pour lancer le script caché précédent */
   // Récupération des éléments nécessaires pour le script caché
-  let imageContactBg = document.querySelector('.image-contact-bg');
-  let secretButton = document.querySelector('.secret');
+  let imageContactBg = document.querySelector(".image-contact-bg");
+  let secretButton = document.querySelector(".secret");
 
   if (imageContactBg) {
     // Ajout d'un écouteur d'événement lorsqu'on survole l'image de fond
-    imageContactBg.addEventListener('mouseenter', function () {
+    imageContactBg.addEventListener("mouseenter", function () {
       secretButton.style.transitionDelay = "2s";
-      secretButton.classList.add('active');
+      secretButton.classList.add("active");
       // Attente de 2 secondes avant d'afficher le bouton secret
       setTimeout(function () {
-        secretButton.classList.add('hover');
+        secretButton.classList.add("hover");
         // script pour décaler la souris de l'utilisateur afin de refresh le cursor pointer
         () => moveCursor();
         // Ajout d'un écouteur d'événement lorsqu'on clique sur le bouton secret
-        secretButton.addEventListener('click', function () {
+        secretButton.addEventListener("click", function () {
           if (!isRunning) {
             isRunning = true;
             // Attente de 500ms avant de lancer le script caché
             setTimeout(function () {
               var console = document.querySelector(".console");
-              console.classList.add('active');
+              console.classList.add("active");
               imageContactBg.style.display = "none";
               type(commands, responses, 0);
             }, 500);
@@ -202,19 +201,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 2000);
     });
     // Ajout d'un écouteur d'événement lorsqu'on quitte la zone de l'image de fond
-    imageContactBg.addEventListener('mouseleave', function () {
+    imageContactBg.addEventListener("mouseleave", function () {
       secretButton.style.transitionDelay = "0s";
-      secretButton.classList.remove('active');
-      secretButton.classList.remove('hover');
+      secretButton.classList.remove("active");
+      secretButton.classList.remove("hover");
 
     });
   }
   if (secretButton) {
     // Ajout d'un écouteur d'événement lorsque l'utilisateur quitte le bouton secret
-    secretButton.addEventListener('mouseleave', function () {
+    secretButton.addEventListener("mouseleave", function () {
       secretButton.style.transitionDelay = "0s";
-      secretButton.classList.remove('active');
-      secretButton.classList.remove('hover');
+      secretButton.classList.remove("active");
+      secretButton.classList.remove("hover");
 
     });
   }
@@ -224,18 +223,18 @@ document.addEventListener("DOMContentLoaded", function () {
   if (carrouselContainer) {
     // Initialisation de la position du carrousel
     let position = 0;
-    const articles = document.getElementsByClassName('article');
-    const carrouselInner = document.getElementsByClassName('carrousel-inner')[0];
+    const articles = document.getElementsByClassName("article");
+    const carrouselInner = document.getElementsByClassName("carrousel-inner")[0];
 
-    const arrowLeft = document.getElementById('arrow-left');
-    const arrowRight = document.getElementById('arrow-right');
+    const arrowLeft = document.getElementById("arrow-left");
+    const arrowRight = document.getElementById("arrow-right");
 
     // Fonction pour mettre à jour la visibilité des flèches du carrousel
     function updateArrowsVisibility() {
       const maxPosition = getTotalWidth() - carrouselInner.offsetWidth;
 
-      arrowLeft.style.visibility = position === 0 ? 'hidden' : 'visible';
-      arrowRight.style.visibility = position > maxPosition - 100 ? 'hidden' : 'visible';
+      arrowLeft.style.visibility = position === 0 ? "hidden" : "visible";
+      arrowRight.style.visibility = position > maxPosition - 100 ? "hidden" : "visible";
     }
 
     // Fonction pour réinitialiser la position du carrousel
@@ -362,37 +361,37 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Gestion du script pour afficher/cacher les commentaires d'un article
-  const singlePostCommentWrapper = document.querySelector('.single-post-comment-wrapper');
+  const singlePostCommentWrapper = document.querySelector(".single-post-comment-wrapper");
 
   if (singlePostCommentWrapper) {
     let isExpanded = false;
     const commentHeader = singlePostCommentWrapper.querySelector('h2');
 
-    commentHeader.addEventListener('click', () => {
+    commentHeader.addEventListener("click", () => {
       if (window.innerWidth > 768) {
 
         if (isExpanded) {
 
-          const content = document.querySelector('#content');
-          content.scrollIntoView({ behavior: 'smooth' });
+          const content = document.querySelector("#content");
+          content.scrollIntoView({ behavior: "smooth" });
 
-          singlePostCommentWrapper.style.transition = '0.25s';
-          singlePostCommentWrapper.style.maxHeight = '70px';
+          singlePostCommentWrapper.style.transition = "0.25s";
+          singlePostCommentWrapper.style.maxHeight = "70px";
           isExpanded = false;
 
-          document.querySelector('#ancre-comment').classList.add('disable')
-          document.querySelector('#ancre-comment').classList.remove('active')
+          document.querySelector("#ancre-comment").classList.add("disable")
+          document.querySelector("#ancre-comment").classList.remove("active")
 
         } else {
           singlePostCommentWrapper.style.transition = "0s";
-          singlePostCommentWrapper.style.maxHeight = '10000px';
+          singlePostCommentWrapper.style.maxHeight = "10000px";
           isExpanded = true;
 
-          const addCommentAnchor = document.querySelector('#comment-form');
-          document.querySelector('#ancre-comment').classList.add('active')
-          document.querySelector('#ancre-comment').classList.remove('disable')
+          const addCommentAnchor = document.querySelector("#comment-form");
+          document.querySelector("#ancre-comment").classList.add("active")
+          document.querySelector("#ancre-comment").classList.remove("disable")
 
-          addCommentAnchor.scrollIntoView({ behavior: 'smooth' });
+          addCommentAnchor.scrollIntoView({ behavior: "smooth" });
 
         }
       }

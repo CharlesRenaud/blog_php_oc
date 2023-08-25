@@ -1,31 +1,39 @@
 <?php
 
-require_once __DIR__.'/vendor/autoload.php';
+declare(strict_types=1);
+
+require_once __DIR__ . '/vendor/autoload.php';
+
 require_once __DIR__ . '/src/Controllers/HomeController.php';
+
 require_once __DIR__ . '/src/Controllers/PostController.php';
+
 require_once __DIR__ . '/src/Controllers/SessionController.php';
+
 require_once __DIR__ . '/src/Controllers/AssetsController.php';
+
 require_once __DIR__ . '/src/Services/PostService.php';
+
 require_once __DIR__ . '/src/Services/CommentService.php';
+
 require_once __DIR__ . '/src/Services/UserService.php';
+
 require_once __DIR__ . '/src/Doctrine.php';
 
 use AltoRouter as AltoRouter;
-use Symfony\Component\HttpFoundation\Request;
-use \Twig\Extension\DebugExtension;
-
+use App\Controllers\AssetsController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
 use App\Controllers\SessionController;
-use App\Controllers\AssetsController;
 use App\Services\CommentService;
 use App\Services\PostService;
 use App\Services\UserService;
-
+use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 /*Codacy test */
+
 session_start();
 
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
@@ -35,12 +43,10 @@ $transport->setStreamOptions([
     'ssl' => [
         'verify_peer' => false,
         'verify_peer_name' => false,
-        'allow_self_signed' => true
-    ]
+        'allow_self_signed' => true,
+    ],
 ]);
 $mailer = new Swift_Mailer($transport);
-
-
 
 $uri = $_SERVER['REQUEST_URI'];
 $router = new AltoRouter();
@@ -67,7 +73,6 @@ if ($is_admin === true) {
 } else {
     $user = ['is_admin' => false, 'authenticated' => false];
 }
-
 
 // Initialiser twig
 $loader = new FilesystemLoader(__DIR__ . '/templates');
@@ -101,9 +106,6 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($name, $params = [])
 
 // Ajoutez la variable user à tous les templates qui étendent bas.html.twig
 $twig->addGlobal('user', $user);
-
-
-
 
 // Initaliser les services
 $entityManager = Doctrine::getEntityManager();
@@ -140,7 +142,6 @@ $router->map('POST', '/comment/[i:id]/delete', 'PostController#deleteComment', '
 $router->map('GET', '/assets/styles/base.css', 'AssetsController#serveCss', 'serve_css');
 $router->map('GET', '/assets/scripts/js.js', 'AssetsController#serveJs', 'serve_js');
 
-
 // Match the current request
 $match = $router->match();
 
@@ -155,106 +156,131 @@ if ($match) {
     echo 'No matching routes found for: ' . $uri . '<br>';
 }*/
 
-
 // Match des routes
 if ($match) {
-    list($controller, $action) = explode("#", $match['target']);
+    list($controller, $action) = explode('#', $match['target']);
+
     switch ($controller) {
-        case "HomeController":
+        case 'HomeController':
             $request = Request::createFromGlobals();
             $home = new HomeController($twig, $mailer);
             $response = $home->$action($request);
             echo $response->getContent();
+
             break;
-        case "AssetsController":
+        case 'AssetsController':
             $assets = new AssetsController();
             $request = Request::createFromGlobals();
+
             switch ($action) {
                 case 'serveJs':
                     $response = $assets->$action($request);
                     echo $response->getContent();
+
                     break;
                 case 'serveCss':
                     $response = $assets->$action($request);
                     echo $response->getContent();
+
                     break;
             }
+
             break;
-        case "PostController":
+        case 'PostController':
             $post = new PostController($twig, $postService, $commentService, $userService);
             $request = Request::createFromGlobals();
+
             switch ($action) {
                 case 'AllPosts':
                     $response = $post->$action();
                     echo $response->getContent();
+
                     break;
                 case 'Post':
                     $postId = $match['params']['id'];
                     $response = $post->$action($postId);
                     echo $response->getContent();
+
                     break;
                 case 'addPost':
                     $response = $post->addPost($request);
                     echo $response->getContent();
+
                     break;
                 case 'deletePost':
                     $response = $post->deletePost($match);
                     echo $response->getContent();
+
                     break;
                 case 'editPost':
                     $response = $post->editPost($request, $match);
                     echo $response->getContent();
+
                     break;
                 case 'addComment':
                     $response = $post->addComment($request, $match);
                     echo $response->getContent();
+
                     break;
                 case 'validateComment':
                     $response = $post->validateComment($request, $match);
                     echo $response->getContent();
+
                     break;
                 case 'deleteComment':
                     $response = $post->deleteComment($request, $match);
                     echo $response->getContent();
+
                     break;
             }
+
             break;
-        case "SessionController":
+        case 'SessionController':
             $session = new SessionController($entityManager, $twig);
             $request = Request::createFromGlobals();
+
             switch ($action) {
                 case 'login':
                     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-                        header("Location: ");
+                        header('Location: ');
+
                         exit;
-                    } else {
-                        $response = $session->login($request);
-                        echo $response->getContent();
-                        break;
                     }
+                    $response = $session->login($request);
+                    echo $response->getContent();
+
+                    break;
+
                 case 'register':
                     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-                        header("Location: ");
+                        header('Location: ');
+
                         exit;
-                    } else {
-                        $response = $session->register($request);
-                        echo $response->getContent();
-                        break;
                     }
+                    $response = $session->register($request);
+                    echo $response->getContent();
+
+                    break;
+
                 case 'logout':
                     $response = $session->logout();
                     echo $response->getContent();
+
                     break;
                 default:
-                    echo "404 Page Not Found";
+                    echo '404 Page Not Found';
+
                     break;
             }
+
             break;
         default:
-            echo "404 Page Not Found";
+            echo '404 Page Not Found';
+
             break;
     }
 } else {
-    header("Location: /");
+    header('Location: /');
+
     exit;
 }
