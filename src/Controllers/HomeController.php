@@ -38,13 +38,19 @@ class HomeController
             session_start();
         }
 
-        // Vérifier si les nombres aléatoires sont déjà définis
-        $_SESSION['number1'] = isset($_SESSION['number1']) ? $_SESSION['number1'] : rand(0, 9);
-        $_SESSION['number2'] = isset($_SESSION['number2']) ? $_SESSION['number2'] : rand(0, 9);
+        session_start();
 
+        if (!isset($_SESSION['number1'])) {
+            $_SESSION['number1'] = rand(0, 9);
+        }
+        
+        if (!isset($_SESSION['number2'])) {
+            $_SESSION['number2'] = rand(0, 9);
+        }
+        
         $number1 = $_SESSION['number1'];
         $number2 = $_SESSION['number2'];
-
+        
         if ($request->getMethod() === 'POST') {
             $data = [
                 'name' => $request->request->get('name'),
