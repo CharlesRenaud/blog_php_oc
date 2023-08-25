@@ -48,7 +48,7 @@ $transport->setStreamOptions([
 ]);
 $mailer = new Swift_Mailer($transport);
 
-$uri = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
+$uri = isset($_SERVER['REQUEST_URI']) ? filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL) : '';
 $router = new AltoRouter();
 
 // Vérifiez si l'utilisateur est connecté et est un admin
