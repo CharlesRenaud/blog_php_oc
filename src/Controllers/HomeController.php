@@ -38,19 +38,13 @@ class HomeController
             session_start();
         }
 
-        session_start();
+        $number1 = isset($_SESSION['number1']) ? $_SESSION['number1'] : rand(0, 9);
+        $number2 = isset($_SESSION['number2']) ? $_SESSION['number2'] : rand(0, 9);
 
-        if (!isset($_SESSION['number1'])) {
-            $_SESSION['number1'] = rand(0, 9);
-        }
-        
-        if (!isset($_SESSION['number2'])) {
-            $_SESSION['number2'] = rand(0, 9);
-        }
-        
-        $number1 = $_SESSION['number1'];
-        $number2 = $_SESSION['number2'];
-        
+        $_SESSION['number1'] = $number1;
+        $_SESSION['number2'] = $number2;
+
+
         if ($request->getMethod() === 'POST') {
             $data = [
                 'name' => $request->request->get('name'),
@@ -68,8 +62,7 @@ class HomeController
 
             $errors = $this->validateFormData($data);
 
-            // Validation de la réponse à la question mathématique
-            if (intval($data['maths']) !== ($number1 + $number2)) {
+            if ((int)$data['maths'] !== ($number1 + $number2)) {
                 $errors['maths'] = 'La réponse à la question de mathématiques est incorrecte. Veuillez réessayer.';
             }
 
