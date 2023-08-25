@@ -51,15 +51,6 @@ $mailer = new Swift_Mailer($transport);
 $uri = isset($_SERVER['REQUEST_URI']) ? filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL) : '';
 $router = new AltoRouter();
 
-// Vérifiez si l'utilisateur est connecté et est un admin
-if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true) {
-    $user = ['is_admin' => true, 'authenticated' => true, 'name' => $_SESSION['name']];
-} elseif (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-    $user = ['is_admin' => false, 'authenticated' => true, 'name' => $_SESSION['name']];
-} else {
-    $user = ['is_admin' => false, 'authenticated' => false];
-}
-
 // Assurez-vous que toutes les variables de session sont initialisées
 $is_admin = isset($_SESSION['is_admin']) ? $_SESSION['is_admin'] : false;
 $authenticated = isset($_SESSION['authenticated']) ? $_SESSION['authenticated'] : false;
