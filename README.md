@@ -45,4 +45,6 @@ Consultez le rapport d'analyse de code pour ce projet :
 
 - Codacy : [lien](https://app.codacy.com/gh/CharlesRenaud/blog_php_oc/dashboard)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8d9ab0a64a6f44999e5ded4428eefe81)](https://app.codacy.com/gh/CharlesRenaud/blog_php_oc/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 
