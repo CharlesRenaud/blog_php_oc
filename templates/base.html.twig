@@ -2,19 +2,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-<<<<<<< HEAD
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 		<title>
 			{% block title %}Devcarl Blog
 			{% endblock %}
 		</title>
 		<link rel="stylesheet" href="{{ path('serve_css') }}">
-<<<<<<< HEAD
 		<link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon"/>
-=======
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 	</head>
 	<body>
 		<div id="header">
@@ -26,7 +20,6 @@
 								<p>Bienvenue
 									{{ user.name }}</p>
 							{% else %}
-<<<<<<< HEAD
 								<p class="back"></p>
 							{% endif %}
 							<ul class="menu">
@@ -41,22 +34,6 @@
 								</li>
 								<li>
 									<a href="/logout">Déconnexion</a>
-=======
-								<p></p>
-							{% endif %}
-							<ul class="menu">
-								<li>
-									<a href="/blog_php_oc/">Accueil</a>
-								</li>
-								<li>
-									<a href="/blog_php_oc/posts">Publications</a>
-								</li>
-								<li>
-									<a href="/blog_php_oc/post/add-post">Publier</a>
-								</li>
-								<li>
-									<a href="/blog_php_oc/logout">Déconnexion</a>
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 								</li>
 							</ul>
 						{% else %}
@@ -68,7 +45,6 @@
 							{% endif %}
 							<ul class="menu">
 								<li>
-<<<<<<< HEAD
 									<a href="/">Accueil</a>
 								</li>
 								<li>
@@ -76,15 +52,6 @@
 								</li>
 								<li>
 									<a href="/logout">Déconnexion</a>
-=======
-									<a href="/blog_php_oc/">Accueil</a>
-								</li>
-								<li>
-									<a href="/blog_php_oc/posts">Publications</a>
-								</li>
-								<li>
-									<a href="/blog_php_oc/logout">Déconnexion</a>
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 								</li>
 							</ul>
 						{% endif %}
@@ -96,7 +63,6 @@
 							{% endif %}
 						<ul class="menu">
 							<li>
-<<<<<<< HEAD
 								<a href="/">Accueil</a>
 							</li>
 							<li>
@@ -107,18 +73,6 @@
 							</li>
 							<li>
 								<a href="/login">Connexion</a>
-=======
-								<a href="/blog_php_oc/">Accueil</a>
-							</li>
-							<li>
-								<a href="/blog_php_oc/posts">Publications</a>
-							</li>
-							<li>
-								<a href="/blog_php_oc/register">Inscription</a>
-							</li>
-							<li>
-								<a href="/blog_php_oc/login">Connexion</a>
->>>>>>> 47511f0b1717e522b9c821facf56431bf8316335
 							</li>
 						</ul>
 					{% endif %}

@@ -31,14 +31,22 @@ use App\Services\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Dotenv\Dotenv;
 
 /*Codacy test */
 
-session_start();
+// Start the session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$dotenv = Dotenv::createImmutable(__DIR__ . "/src");
+$dotenv->load();
 
 $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
-    ->setUsername('smtpocblogtest@gmail.com')
-    ->setPassword('chizwfuhtvjfwktj');
+    ->setUsername($_ENV['SMTP_LOGIN'])
+    ->setPassword($_ENV['SMTP_PASSWORD']);
+
 $transport->setStreamOptions([
     'ssl' => [
         'verify_peer' => false,
@@ -189,7 +197,7 @@ if ($match) {
                     break;
                 case 'Post':
                     $postId = $match['params']['id'];
-                    $response = $post->$action($postId);
+                    $response = $post->$action(intval($postId));
                     echo $response->getContent();
 
                     break;
