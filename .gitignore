@@ -1,3 +1,4 @@
 /vendor/
 commandes.txt
 .php-cs-fixer.cache
+.env
