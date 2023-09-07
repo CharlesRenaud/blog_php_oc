@@ -1,5 +1,7 @@
 # Blog PHP OC
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/671022e428fb4045a158d4cfb5356503)](https://app.codacy.com/gh/CharlesRenaud/blog_php_oc?utm_source=github.com&utm_medium=referral&utm_content=CharlesRenaud/blog_php_oc&utm_campaign=Badge_Grade)
+
 <a href="https://blog.devcarl.fr/" style="text-decoration: none; color: blue; font-weight: bold;">Visiter le site</a>
 
 ## Sommaire
