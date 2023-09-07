@@ -43,6 +43,6 @@ Vous trouverez ci-dessous les diagrammes UML de ce projet :
 
 Consultez le rapport d'analyse de code pour ce projet :
 
-- Codacy : [lien](URL_VERS_LE_RAPPORT_CODACY)
+- Codacy : [lien](https://app.codacy.com/gh/CharlesRenaud/blog_php_oc/dashboard)
 
 
