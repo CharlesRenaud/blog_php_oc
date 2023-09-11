@@ -36,8 +36,8 @@ Expliquez ici comment configurer les variables d'environnement, les paramètres 
 Vous trouverez ci-dessous les diagrammes UML de ce projet :
 
 - Diagrammes de Cas d'Utilisation : [lien](diagrammes/cas%20d'utilisation)
-- Diagramme de Classes : [lien](diagrammes/classe.png)
-- Diagrammes de Séquence : [lien](diagrammes/sequence.png)
+- Diagramme de Classes : [lien](diagrammes/classe)
+- Diagrammes de Séquence : [lien](diagrammes/sequence)
 
 ## Analyse de Code
 
